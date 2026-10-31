@@ -164,15 +164,20 @@ function reset(){['LE','LB','LT','LC','PN1','PN2'].forEach(i=>$(i).innerHTML='')
  ['gE','gI'].forEach(i=>{GO[i]=0;$(i).setAttribute('width',240);});led(0);['f1','f2','f3'].forEach(i=>fdOn(i,0));scr('Monitorando','#475569',0);bd('');sub('');
  dot('sp1',300,880,COL.v,'AGENTE');dot('sp2',1182,880,COL.v,'AGENTE');DQ=[];patrolOn=true;PA.sp1.n=3000;PA.sp2.n=5500;}
 /* shared sequences */
-function open_(o){
- car('c',-170,LY,COL[o.d||'g'],o.p?COL[o.p]:null);dot('a',1425,845,COL.v,'AGENTE');go('c',[[EX,LY],[EX,885]],400);
- A(400,()=>{hl('a',1);tag('t1','AGENTE EXTERNO\n1ª camada: triagem na rua',1260,830,1413,848,COL.v)});
- A(4700,()=>say('a','a','Bom dia!',2000));
- A(6200,()=>o.nc?say('u','c:d','Bom dia! Vim visitar o morador André, que está aqui comigo.',3400):say('m','c','Acionei o controle!',2000));
- A(7400,()=>{if(o.nc)say('p','P','Sem controle: abrindo o portão externo.',2200);if(o.pan)scr('PÂNICO ACIONADO','#ef4444',0);gate('gE',1)});
- A(8800,()=>{hl('a',0);tag('t1');go('c',[[EX,590]],100);go('a',[[1440,830],[1440,590]],90)});
- A(11800,()=>{gate('gE',0);tag('t2','TRIAGEM DENTRO DA ECLUSA\nZona controlada, ainda considerada rua:\nlocal seguro, mais uma camada',1060,480,1380,520,'#60a5fa')});
- return 13000;}
+/* ===== sincronismo com a narração: a animação é ancorada em cada frase ===== */
+let CHK=[],CST=[],CEND=0,NP=-1,NK=-1,EL=0,RT=1,MODE='s';const MS0=68,GAP=300;
+function KI(p){const k=CHK.findIndex(c=>c.startsWith(p));if(k<0){console.warn('SEM FRASE: '+p);return 0;}return k;}
+function Wd(p){const k=KI(p);return (k+1<CHK.length?CST[k+1]:CEND)-CST[k];}
+function at(p,f){const k=KI(p);return CST[k]+(f||0)*Wd(p);}
+function spd(dist,ms,min){return Math.max(min||40,dist/(Math.max(400,ms)/1000));}
+function open_(o,p1,p2,fa){fa=fa||.7;
+ car('c',-170,LY,COL[o.d||'g'],o.p?COL[o.p]:null);dot('a',1425,845,COL.v,'AGENTE');
+ A(at(p1,0),()=>{go('c',[[EX,LY],[EX,885]],spd(1730,.75*Wd(p1),300));hl('a',1);tag('t1','AGENTE EXTERNO\n1ª camada: triagem na rua',1260,830,1413,848,COL.v)});
+ A(at(p1,.5),()=>say('a','a','Bom dia!',2000));
+ A(at(p1,.68),()=>say('m','c','Acionei o controle!',2000));
+ A(at(p1,.85),()=>{if(o.pan)scr('PÂNICO ACIONADO','#ef4444',0);gate('gE',1)});
+ A(at(p2,0),()=>{hl('a',0);tag('t1');go('c',[[EX,590]],spd(295,fa*Wd(p2),90));go('a',[[1440,830],[1440,590]],spd(265,fa*Wd(p2),90))});
+ A(at(p2,fa+.05),()=>{gate('gE',0);tag('t2','TRIAGEM DENTRO DA ECLUSA\nZona controlada, ainda considerada rua:\nlocal seguro, mais uma camada',1060,480,1380,520,'#60a5fa')});}
 function face(){fdOn('f3',1);scr('MORADOR identificado','#22c55e',1);tag('t3','FACIAL VALIDADA\nFoto do morador sobe na portaria',1060,650,1386,570,'#22c55e');}
 function panel(id,x,y,w,ti,rows,c){const g=$(id);g.innerHTML='';delete TGR[id];if(!ti)return;const h=rows.length*30+54;
  el('rect',{x,y,width:w,height:h,rx:10,fill:'#0b2545','fill-opacity':.96,stroke:c,'stroke-width':3},g);
@@ -187,14 +192,15 @@ function pstep(n,done){const R=[];for(let i=0;i<n;i++){const ok=i<n-1||done;R.pu
 const VST1='VIDROS BAIXOS · SENHA CORRETA\nSem porta-malas e sem luz interna:\nnão é acesso de pânico';
 const VST='PORTA-MALAS ABERTO · VIDROS BAIXOS\nVistoria completa: veículo de terceiros\nsem controle, sem como sinalizar pânico';
 function wipe(){['LB','LT'].forEach(i=>$(i).innerHTML='');TG={};TGR={};BB=[];['f1','f2','f3'].forEach(i=>fdOn(i,0));scr('Monitorando','#475569',0);gate('gE',0);gate('gI',0);['c','a','v'].forEach(i=>{if(E[i])rm(i)});}
-function tri(t,line,tg,o){A(t,()=>{say('a','a',line||'Abra os vidros, acenda a luz interna e abra o porta-malas, por favor.',3600);if(o)E.c.wn.setAttribute('opacity',1);else cfx('c',1);
+function tri(ts,tw_,wd,line,tg,o){A(ts,()=>{say('a','a',line||'Abra os vidros, acenda a luz interna e abra o porta-malas, por favor.',3600);if(o)E.c.wn.setAttribute('opacity',1);else cfx('c',1);
   tag('tm',tg||'PORTA-MALAS ABERTO · VIDROS BAIXOS\nProcedimento de pânico: abertura do\nporta-malas e luz interna acesa',1010,572,1440,668,'#fde047')});
- A(t+1500,()=>go('a',[[1440,700],[1560,700],[1560,590]],68));return t+7000;}
-function rel(t,cl,v){if(cl){A(t,()=>{if(!v)say('a','a','Pode fechar o porta-malas e os vidros, por favor.',3000);tag('tm',v?'FECHANDO OS VIDROS\nAntes de entrar na garagem':'ATENÇÃO: FECHAR O PORTA-MALAS\nO veículo não pode entrar na garagem\ncom o porta-malas aberto',1010,572,1440,668,'#f59e0b')});
-  A(t+2200,()=>{cfx('c',0);tag('tm',v?'VIDROS FECHADOS\nLiberado para entrar na garagem':'PORTA-MALAS FECHADO\nLiberado para entrar na garagem',1010,572,1440,668,'#22c55e')});
-  A(t+4600,()=>tag('tm'));t+=4800;}
- A(t,()=>{say('p','P','Identidade confirmada. Liberando o portão interno.',2600);scr('Portão interno liberado','#2dd4bf',1);tag('t4','2ª CAMADA DE PROTEÇÃO\nPortão interno',1080,385,1380,333,'#2dd4bf');gate('gI',1)});
- A(t+1400,()=>go('c',[[EX,210],[900,210]],300));return t+5200;}
+ A(tw_,()=>go('a',[[1440,700],[1560,700],[1560,590]],spd(340,wd,30)));}
+function rel(tc,tcl,to,tg,cl,v,sp){
+ if(cl){A(tc,()=>{if(!v)say('a','a','Pode fechar o porta-malas, por favor.',3000);tag('tm',v?'FECHANDO OS VIDROS\nAntes de entrar na garagem':'ATENÇÃO: FECHAR O PORTA-MALAS\nO veículo não pode entrar na garagem\ncom o porta-malas aberto',1010,572,1440,668,'#f59e0b')});
+  A(tcl,()=>{cfx('c',0);tag('tm',v?'VIDROS FECHADOS\nLiberado para entrar na garagem':'PORTA-MALAS FECHADO\nLiberado para entrar na garagem',1010,572,1440,668,'#22c55e')});
+  A(to-250,()=>tag('tm'));}
+ A(to,()=>{say('p','P','Identidade confirmada. Liberando o portão interno.',2600);scr('Portão interno liberado','#2dd4bf',1);tag('t4','2ª CAMADA DE PROTEÇÃO\nPortão interno',1080,385,1380,333,'#2dd4bf');gate('gI',1)});
+ A(tg,()=>go('c',[[EX,210],[900,210]],sp||300));}
 /* scenes */
 function card(ti,rows){const g=$('LC');g.innerHTML='';CARD=null;if(!ti)return;const X=100,Y=340,Wd=1190,L=[];let y=64;
  rows.forEach(r=>{if(r[0]==='r'){const a=wrapT(r[1],30),b=wrapT(r[2],60),n=Math.max(a.length,b.length);L.push({k:'r',a,b,y,lh:25});y+=n*25+14;}else{const ls=wrapT(r[1],84);L.push({k:r[0],ls,y});y+=ls.length*30+12;}});
@@ -348,22 +354,217 @@ function(){car('c',-170,LY,COL.g,null);dot('a',1425,845,COL.v,'AGENTE');go('c',[
  A(4700,()=>say('a','a','Bom dia!',1800));A(6000,()=>gate('gE',1));A(7200,()=>{go('c',[[EX,590]],100);go('a',[[1440,830],[1440,590]],90)});
  A(10300,()=>gate('gE',0));A(11300,()=>gate('gI',1));A(12500,()=>go('c',[[EX,210],[900,210]],300));
  A(16500,()=>bd('Sugerido pela Moked.\nDecidido pelos moradores.','#fff'));A(21500,()=>bd('Segurança coletiva se faz com a\ncolaboração de todos. Contamos com você!','#e8a317'));}];
+
+/* ===== cenas ancoradas na narração (substituem as antigas) ===== */
+SC[0]=function(){dot('r',900,880,COL.r);hl('r',1);
+ const E1='É justamente',E2='Mas é importante';
+ A(at('Muitas vezes',0),()=>{bd('Oportunidade e facilidade:\no que o criminoso procura','#fca5a5');go('r',[[1300,860]],spd(400,.9*Wd('Muitas vezes')))});
+ A(at('Ele procura',0),()=>{bd('Acessos vulneráveis, poucas barreiras\ne entrada sem triagem adequada','#fca5a5');gate('gE',1);go('r',[[1500,840]],spd(210,.8*Wd('Ele procura')))});
+ A(at(E1,0),()=>{bd('Com triagem e barreiras, ele desiste','#86efac');gate('gE',0);dot('a',1425,845,COL.v,'AGENTE');hl('a',1);tag('t1','AGENTE EXTERNO\n1ª camada: triagem na rua',1260,830,1413,848,COL.v);go('r',[[700,890]],spd(800,.85*(at(E2,0)-at(E1,0))))});
+ A(at('posteriormente',0),()=>bd('Recomendado tecnicamente pela Moked,\ndiscutido e aprovado pelo conselho de moradores','#e8a317'));
+ A(at(E2,0),()=>bd('O objetivo não é burocratizar a sua rotina,\nmas proteger todos os moradores','#86efac'));
+ A(at('A segurança do condomínio',0),()=>bd('Segurança: quem entra e\ncomo a entrada é realizada','#e8a317'));
+ A(at('Cada etapa',0),()=>bd('Cada etapa: reduzir vulnerabilidades\ne ampliar a prevenção','#e8a317'));
+ A(at('Mais do que controlar',0),()=>bd('Mais do que controlar acessos,\nestamos protegendo pessoas,\nfamílias e lares','#86efac'));};
+
+SC[1]=function(){car('c',-170,LY,COL.g,COL.g);
+ const P1='Ao se aproximar',P2='O veículo entra na eclusa.',P3='O morador realiza o reconhecimento',P4='O veículo passa.',P5='Mas, logo depois',P6='Existe uma ameaça',P7='E o mais preocupante',
+  Q0='Agora, veja como',Q1='Com o controle linear',Q2='O morador precisa',Q3='O veículo entra na eclusa e passa',Q4='O agente realiza a vistoria',Q5='O reconhecimento facial, por si só',Q6='A abertura depende',Q7='Dessa forma, o veículo',Q8='Se alguma irregularidade',Q9='Mais controle';
+ A(at('Antes, o morador',0),()=>bd('Antes: TAG passiva\nO portão abre sozinho','#fca5a5'));
+ A(at(P1,0),()=>go('c',[[EX,LY],[EX,885]],spd(1730,.8*Wd(P1))));
+ A(at(P1,.85),()=>{gate('gE',1);tag('t1','TAG: o 1º portão abre sozinho\nPassageiro verde: ninguém desconfia',1180,830,1440,870,'#fca5a5')});
+ A(at('A triagem era feita',0),()=>bd('Sem triagem: apenas visual, na rua','#fca5a5'));
+ A(at(P2,0),()=>go('c',[[EX,590]],spd(295,.85*Wd(P2),90)));
+ A(at(P2,.9),()=>{gate('gE',0);tag('t1')});
+ A(at(P3,0),()=>{fdOn('f3',1);scr('MORADOR identificado','#22c55e',1);tag('t3','FACIAL VALIDADA\nO portão interno abre sozinho',1060,650,1386,570,'#22c55e')});
+ A(at(P3,.6),()=>gate('gI',1));
+ A(at(P4,0),()=>go('c',[[EX,210],[900,210]],spd(980,Wd(P4)+.6*Wd(P5))));
+ A(at(P5,.65),()=>{gate('gI',0);fdOn('f3',0);tag('t3');scr('Monitorando','#475569',0);oc('c','p',COL.r,1);flash(1)});
+ A(at(P6,0),()=>{bd('RISCO DENTRO DO CONDOMÍNIO!\nA ameaça já passou pelas 2 barreiras','#ef4444',1);tag('t5','ALERTA: AMEAÇA DENTRO DO CONDOMÍNIO\nO morador não teve como sinalizar',1190,235,965,215,'#ef4444')});
+ A(at(P7,.1),()=>{scr('Tudo normal · sem alerta','#22c55e',1);say('p','P','Tudo normal. Nenhum alerta recebido.',3200)});
+ A(at(P7,.4),()=>say('a','sp1','Tudo tranquilo por aqui.',3200));
+ A(at(P7,.65),()=>bd('Sem pânico possível, a equipe\nnão percebe o risco','#fca5a5'));
+ A(at(Q0,0),()=>{rm('c');flash(0);tag('t5');gate('gI',0);gate('gE',0);fdOn('f3',0);scr('Monitorando','#475569',0);
+  bd('Agora: controle linear anticlonagem\nCom triagem completa na eclusa','#86efac');
+  car('c',-170,LY,COL.g,COL.g);dot('a',1425,845,COL.v,'AGENTE');go('c',[[EX,LY],[EX,885]],spd(1730,.9*(Wd(Q0)+.5*Wd(Q1))))});
+ A(at(Q2,.2),()=>{say('m','c','Acionei o controle!',2200);gate('gE',1);tag('t1','Ação consciente do morador\nse integra às novas camadas',1260,830,1470,870,'#86efac')});
+ A(at(Q3,0),()=>{go('c',[[EX,590]],spd(295,.8*Wd(Q3),90));go('a',[[1440,830],[1440,590]],spd(265,.8*Wd(Q3),90))});
+ A(at(Q3,.85),()=>{gate('gE',0);tag('t1');bd('');tag('t2','AGENTE ENTRA NA ECLUSA\nTriagem normal: vistoria do veículo',1060,480,1380,520,'#60a5fa')});
+ A(at(Q4,0),()=>say('a','a','Bom dia! Vou fazer a triagem do veículo.',3200));
+ A(at(Q4,.1),()=>go('a',[[1440,700],[1560,700],[1560,590]],spd(340,.85*Wd(Q4),30)));
+ A(at(Q5,0),()=>{fdOn('f3',1);scr('MORADOR identificado','#22c55e',1);tag('t3','FACIAL VALIDADA\nmas NÃO abre o portão interno',1060,650,1386,570,'#f59e0b')});
+ A(at(Q6,.4),()=>say('a','a','Portaria, solicito a abertura do portão interno.',3000));
+ A(at(Q7,0),()=>tag('t6','AINDA DENTRO DA ECLUSA\nSe houver ameaça, ela é contida aqui,\nantes do portão interno',1010,572,1440,600,'#fde047'));
+ A(at(Q9,0),()=>{tag('t2');tag('t3');tag('t6');bd('Mais controle, mais uma camada de proteção\ne uma chance real de barrar a ameaça','#86efac')});
+ rel(0,0,at(Q9,.1),at(Q9,.4),0,0,spd(980,.55*Wd(Q9)));};
+
+SC[3]=function(){const p1='O morador está sozinho',p2='O agente acessa',p3='Em seguida, o morador faz',p4='Após a liberação';
+ open_({},p1,p2,.4);
+ A(at(p2,.45),()=>tag('tm','VISUAL AO REDOR DO VEÍCULO\nO agente dá a volta completa, por trás',1010,572,1440,668,'#fde047'));
+ A(at(p2,.45),()=>go('a',[[1440,700],[1560,700],[1560,590]],spd(340,.5*Wd(p2),30)));
+ A(at(p3,0),()=>{tag('tm');face()});
+ rel(0,0,at(p3,.6),at(p4,.1),0,0,spd(980,.85*Wd(p4)));};
+
+SC[4]=function(){const p1='O morador está sozinho',p2='O agente acessa',p3='Em seguida, o morador faz',p4='O agente solicita que',p5='Não havendo suspeitos',p6='Antes da liberação',p7='Após a conclusão';
+ open_({pan:1},p1,p2,.7);
+ A(at(p3,0),face);
+ tri(at(p4,0),at(p4,.15),.8*Wd(p4));
+ A(at(p5,0),()=>say('a','a','Algum motivo para o acionamento do pânico?',2800));
+ A(at(p5,.35),()=>say('m','c','Foi engano, acionei sem querer.',2600));
+ A(at(p5,.7),()=>say('a','a','Sem suspeitos.',2000));
+ rel(at(p6,0),at(p6,.6),at(p7,0),at(p7,.3),1,0,spd(980,.7*Wd(p7)));};
+
+SC[5]=function(){const p1='O morador está acompanhado',p2='O agente acessa',p3='Em seguida',p4='Após a validação',p5='O acompanhante continua',p6='Isso não significa';
+ open_({p:'y'},p1,p2,.7);
+ A(at(p1,.55),()=>tag('t7','Acompanhante desconhecido: amarelo\nSem pânico: fluxo padrão',610,500,null,0,COL.y));
+ A(at(p3,0),face);
+ rel(0,0,at(p4,.25),at(p4,.55),0,0,spd(980,.45*Wd(p4)+.5*Wd(p5)));
+ A(at(p5,0),()=>tag('t7','Acompanhante continua amarelo\nA equipe ainda não o conhece',610,500,null,0,COL.y));
+ A(at(p6,0),()=>tag('t7','Não é ameaça: é uma condição diferente\nRegistrada conforme o procedimento',610,500,null,0,COL.y));};
+
+SC[6]=function(){const p1='O morador está acompanhado',p2='O agente acessa',p3='Em seguida',p4='O agente solicita a abertura do porta-malas',p5='Durante a verificação',p6='Não havendo suspeitos',p7='Após a liberação';
+ open_({p:'g',pan:1},p1,p2,.7);
+ A(at(p1,.55),()=>tag('t7','Acompanhante conhecido: verde\nNão precisa descer',610,500,null,0,COL.g));
+ A(at(p3,0),face);
+ tri(at(p4,0),at(p4,.15),.8*Wd(p4));
+ A(at(p5,0),()=>say('a','a','Algum motivo para o acionamento do pânico?',2800));
+ A(at(p5,.4),()=>say('m','c','Foi engano, acionei sem querer.',2600));
+ rel(at(p6,0),at(p6,.4),at(p6,.62),at(p7,.1),1,0,spd(980,.85*Wd(p7)));};
+
+SC[7]=function(){const p1='O morador está acompanhado',p2='O agente acessa',p3='Em seguida',p4='O agente informa à portaria',p5='Após a saída',p6='Estando tudo em ordem',p7='O visitante é então',p8='Dessa forma';
+ open_({p:'y',pan:1},p1,p2,.7);
+ A(at(p1,.55),()=>tag('t7','Acompanhante desconhecido: amarelo',610,500,null,0,COL.y));
+ A(at(p3,0),face);
+ A(at(p4,0),()=>say('a','a','Portaria, há uma pessoa desconhecida. Solicito abrir o portão externo.',4000));
+ A(at(p4,.25),()=>say('p','P','Abrindo o portão externo.',2200));
+ A(at(p4,.3),()=>{gate('gE',1);say('a','a','Por gentileza, desça e siga até a portaria para o cadastro.',3600);oc('c','p',null);dot('v',EX+14,580,COL.y);go('v',[[1565,570],[1565,830],[1142,870]],spd(740,.55*Wd(p4),60))});
+ A(at(p4,.88),()=>{gate('gE',0);say('p','P','Cadastro do visitante em andamento.',2600);fdOn('f2',1)});
+ tri(at(p5,0),at(p5,.15),.65*Wd(p5),'Agora, abra a luz interna, os vidros e o porta-malas, por favor.');
+ A(at(p5,.8),()=>say('a','a','Senhor, posso liberar o visitante?',2400));
+ A(at(p6,0),()=>say('m','c','Sim, pode liberar.',2000));
+ A(at(p6,.62),()=>{say('p','P','Cadastro concluído. Visitante autorizado.',2600);setCol('v',COL.g);tag('t8','AMARELO → VERDE\nApós o cadastro, entra por pedestres',610,590,null,0,COL.g)});
+ A(at(p7,0),()=>{fdOn('f2',0);go('v',[[1070,870],[1070,800],[1070,690]],spd(250,.45*Wd(p7),30))});
+ rel(at(p6,.25),at(p6,.5),at(p7,.12),at(p7,.5),1,0,spd(980,.5*Wd(p7)));
+ A(at(p8,0),()=>bd('Todas as etapas de segurança cumpridas\nantes da liberação do acesso','#86efac'));};
+
+SC[8]=function(){
+ car('c',EX,590,COL.g,COL.y);E.c.a=-90;put('c');dot('a',1560,590,COL.v,'AGENTE');cfx('c',1);fdOn('f3',1);scr('MORADOR identificado','#22c55e',1);
+ tag('t2','TRIAGEM DENTRO DA ECLUSA\nVistoria em andamento',1060,480,1380,520,'#60a5fa');
+ tag('tm','PORTA-MALAS ABERTO · VIDROS BAIXOS\nPânico acionado: verificação completa',1010,572,1440,668,'#fde047');
+ const P0='Quando a portaria confirma',P1='Isso indica',P2='Ao identificar e confirmar',P3='A central, então',P4='Paralelamente',P5='Nesse cenário',P6='Porém, a entrada',P7='Mas o alerta',P8='Os LEDs de alerta',P9='Esse sinal serve',P10='Ao visualizar',P11='O objetivo é';
+ A(at(P0,.2),()=>{say('p','P','Pânico confirmado! Acionando a Polícia Militar.',3400);scr('PM ACIONADA · AMEAÇA CONFIRMADA','#ef4444',0);dot('r',1300,880,COL.v,'RONDA')});
+ A(at(P0,.62),()=>{oc('c','p',COL.r,1);tag('t8','AMARELO → VERMELHO\nAmeaça confirmada (pisca)',610,590,null,0,'#ef4444')});
+ A(at(P1,0),()=>flash(1));
+ A(at(P2,.3),()=>cstep(1));
+ A(at(P3,.05),()=>cstep(2));A(at(P3,.4),()=>cstep(3));A(at(P3,.75),()=>cstep(4));
+ A(at(P4,0),()=>{say('p','P','Iniciando o plano de chamada.',3000);pstep(1,0)});
+ A(at(P4,.2),()=>pstep(1,1));A(at(P4,.21),()=>pstep(2,0));A(at(P4,.45),()=>pstep(2,1));A(at(P4,.46),()=>pstep(3,0));A(at(P4,.7),()=>pstep(3,1));A(at(P4,.71),()=>pstep(4,0));A(at(P4,.93),()=>pstep(4,1));
+ A(at(P5,.1),()=>{say('a','a','Portão externo liberado para a saída.',2600);gate('gE',1);oc('c','p',null);dot('v',EX+14,580,COL.r);E.v.ci.classList.add('blink');
+  go('v',[[1565,570],[1565,830],[1790,830],[1790,945],[1950,945]],spd(815,.9*Wd(P5)+.6*Wd(P6),30));go('r',[[1440,760],[1440,690]],spd(130,.8*Wd(P5),20))});
+ A(at(P6,.2),()=>{gate('gE',0);tag('t6','ACESSO NEGADO À AMEAÇA\nnem pela entrada social, nem por pedestres',610,420,null,0,'#ef4444')});
+ A(at(P8,.5),()=>{led(1);tag('t5','LEDs EXTERNOS PISCANDO na calçada\nQuem chega não entra e se mantém seguro',540,720,null,0,'#ef4444')});
+ A(at(P10,.05),()=>{dot('w',-40,890,COL.g,'CHEGANDO');go('w',[[330,890]],spd(370,.4*Wd(P10),30))});
+ A(at(P10,.55),()=>{say('m','w','Luz de alerta! Não vou entrar.',3000);});
+ A(at(P10,.7),()=>go('w',[[-80,890]],spd(410,.28*Wd(P10),30)));
+ A(at(P11,0),()=>bd('Alertar, impedir novos acessos e proteger\nquem está dentro e fora do condomínio','#fca5a5'));};
+
+SC[9]=function(){const P={p1:'O morador está em um veículo',p2:'O motorista, sinalizado',p3:'Como o morador está sem',p4:'Por isso, nesse',p5:'Já dentro da eclusa',p7:'Primeira situação',p8:'Nesse caso, o agente entende',p9:'Como não se trata',p10:'Ele solicita apenas',p11:'Ao finalizar',p12:'Segunda situação',p13:'Em vez disso',p14:'Essa resposta',p15:'Nesse caso, o acompanhante',p16:'O agente solicita à portaria',p17:'Com o morador sozinho',p18:'além de uma dupla',p19:'Após a verificação',p20:'O visitante retorna',p21:'Com isso'};
+ car('c',-170,LY,COL.y,COL.g);dot('a',1425,845,COL.v,'AGENTE');
+ A(at(P.p1,0),()=>{go('c',[[EX,LY],[EX,885]],spd(1730,.7*Wd(P.p1),300));hl('a',1);tag('t1','AGENTE EXTERNO\n1ª camada: triagem na rua',1260,830,1413,848,COL.v)});
+ A(at(P.p2,.1),()=>say('u','c:d','Bom dia! Vim visitar o morador André, que está aqui comigo.',3400));
+ A(at(P.p2,.6),()=>{say('p','P','Sem controle: abrindo o portão externo.',2200);gate('gE',1)});
+ A(at(P.p3,.1),()=>{hl('a',0);tag('t1');go('c',[[EX,590]],spd(295,.6*Wd(P.p3),90))});
+ A(at(P.p3,.8),()=>{gate('gE',0);tag('t2','TRIAGEM DENTRO DA ECLUSA\nZona controlada, ainda considerada rua',1060,480,1380,520,'#60a5fa')});
+ A(at(P.p4,0),()=>tag('t7','SENHA = NOME DO ACOMPANHANTE\nO morador não tem o controle para sinalizar',650,430,null,0,'#fde047'));
+ A(at(P.p5,0),()=>go('a',[[1440,830],[1440,590]],spd(265,.6*Wd(P.p5),60)));
+ /* SITUAÇÃO 1 */
+ A(at(P.p7,0),()=>tag('ts','SITUAÇÃO 1 · O MORADOR FALA A SENHA\nSenha = nome do acompanhante',650,215,null,0,'#86efac'));
+ A(at(P.p7,.1),()=>say('m','c:p','Bom dia! Este é o Carlos, meu visitante.',3200));
+ A(at(P.p8,0),()=>{say('a','a','Bom dia, Carlos! Tudo certo.',2600);tag('t7','SENHA CORRETA\nO morador disse o nome do acompanhante',650,430,null,0,'#22c55e')});
+ A(at(P.p8,.55),()=>{face();tag('t7','O ACOMPANHANTE NÃO SAI DO VEÍCULO\nO vigilante entende que está tudo bem',650,430,null,0,'#22c55e')});
+ A(at(P.p9,.05),()=>tag('t7','NÃO É ACESSO DE PÂNICO\nSem porta-malas e sem luz interna',650,430,null,0,'#22c55e'));
+ tri(at(P.p10,0),at(P.p10,.1),.8*Wd(P.p10),'Abra os vidros, por favor.',VST1,1);
+ A(at(P.p10,0),()=>tag('t7'));
+ rel(at(P.p11,0),at(P.p11,.3),at(P.p11,.4),at(P.p11,.5),1,1,spd(980,.5*Wd(P.p11)+.7*Wd(P.p12)));
+ /* SITUAÇÃO 2 */
+ A(at(P.p12,.75),()=>{wipe();car('c',EX,590,COL.y,COL.g);E.c.a=-90;put('c');dot('a',1440,590,COL.v,'AGENTE');
+  tag('ts','SITUAÇÃO 2 · O MORADOR NÃO FALA A SENHA\nQualquer outra frase = acesso de pânico',650,215,null,0,'#fca5a5');
+  tag('t2','TRIAGEM DENTRO DA ECLUSA\nZona controlada, ainda considerada rua',1060,480,1380,520,'#60a5fa')});
+ A(at(P.p13,.3),()=>say('m','c:p','Bom dia! Hoje está frio, não é?',2800));
+ A(at(P.p14,0),()=>{tag('t7','SENHA NÃO FALADA = ACESSO DE PÂNICO\nO morador não disse o nome do acompanhante\nO desconhecido é OBRIGADO a sair',650,430,null,0,'#ef4444');scr('PÂNICO · SENHA NÃO DITA','#ef4444',0)});
+ A(at(P.p15,.3),()=>say('a','a','Senhor, desça do veículo e siga até a portaria para o cadastro.',4200));
+ A(at(P.p16,.05),()=>gate('gE',1));
+ A(at(P.p16,.1),()=>{oc('c','d',null);dot('v',EX-14,580,COL.y);go('v',[[1420,600],[1420,830],[1142,870]],spd(510,.7*Wd(P.p16),50))});
+ A(at(P.p16,.88),()=>gate('gE',0));
+ A(at(P.p17,0),()=>{fdOn('f2',1);say('p','P','Cadastro do visitante em andamento.',2800);tag('t7','DESCONHECIDO NA PORTARIA · CADASTRO\nO morador fica na eclusa, longe de\nquem poderia estar coagindo',650,430,null,0,'#fbbf24')});
+ tri(at(P.p17,.1),at(P.p17,.25),.65*Wd(P.p17),'Abra a luz interna, os vidros e o porta-malas, por favor.',VST);
+ A(at(P.p18,0),()=>{say('a','a','Estamos só nós aqui. O senhor está bem? Quem é essa pessoa de verdade?',4600);tag('t7','DUPLA CHECAGEM NA ECLUSA\nSem o desconhecido por perto, o morador\nconfirma quem ele realmente é',650,430,null,0,'#60a5fa')});
+ A(at(P.p19,0),()=>say('m','c:p','Estou bem. É o Carlos, meu visitante.',3000));
+ A(at(P.p19,.4),()=>{say('p','P','Cadastro e documento conferidos. É visitante.',3200);setCol('v',COL.g);scr('Visitante confirmado','#22c55e',1);tag('t7','VISITANTE CONFIRMADO · AUTORIZADO\nO morador não está mais sendo coagido',650,430,null,0,'#22c55e')});
+ A(at(P.p20,0),()=>{say('a','a','Acesso autorizado. O senhor pode voltar ao veículo.',3200);gate('gE',1);fdOn('f2',0)});
+ A(at(P.p20,.05),()=>go('v',[[1420,830],[1428,610]],spd(505,.45*Wd(P.p20),50)));
+ A(at(P.p20,.56),()=>{gate('gE',0);rm('v');oc('c','d',COL.g,0,1);tag('t7');tag('t2');tag('ts');scr('Monitorando','#475569',0)});
+ rel(at(P.p20,.6),at(P.p20,.78),at(P.p20,.92),at(P.p21,.1),1,0,spd(980,.9*Wd(P.p21)+.08*Wd(P.p20)));};
+
+SC[11]=function(){patrolOn=false;dot('r1',500,925,COL.r);hl('r1',1);dot('r2',1600,880,COL.r);hl('r2',1);
+ go('r1',[[1000,925],[500,925],[1000,925],[500,925],[1000,925],[500,925]],40);go('r2',[[1850,880],[1600,880],[1850,880],[1600,880],[1850,880],[1600,880]],22);
+ const P1='Tanto na entrada social',P2='leitores de reconhecimento',P3='Moradores e prestadores',P4='Já as pessoas sem',P5='Do lado de fora',P6='Mas encontra acessos',P7='A proteção não acontece';
+ A(at(P1,0),()=>{tag('t1','Acesso social: eclusa, facial e agente\nna calçada como barreira externa',520,610,300,866,'#3b82f6');tag('t2','Pedestres e serviços: eclusa, facial e agente\nna calçada como barreira externa',1170,610,1182,866,'#34d399')});
+ A(at(P2,.2),()=>{fdOn('f1',1);fdOn('f2',1)});A(at(P2,.5),()=>{fdOn('f1',0);fdOn('f2',0)});
+ A(at(P3,0),()=>{dot('g1',-40,880,COL.g);go('g1',[[190,880]],spd(230,.3*Wd(P3),40));dot('g2',700,880,COL.g);go('g2',[[1070,880]],spd(370,.4*Wd(P3),40))});
+ A(at(P3,.34),()=>fdOn('f1',1));A(at(P3,.46),()=>{fdOn('f1',0);go('g1',[[190,800],[190,640]],spd(240,.45*Wd(P3),40))});
+ A(at(P3,.52),()=>fdOn('f2',1));A(at(P3,.62),()=>{fdOn('f2',0);go('g2',[[1070,800],[1070,640]],spd(240,.35*Wd(P3),40))});
+ A(at(P3,.2),()=>go('sp2',[[1115,880]],45));A(at(P3,.55),()=>go('sp2',[[1182,880]],45));
+ A(at(P4,0),()=>{dot('y1',-40,890,COL.y);go('y1',[[190,880]],spd(230,.3*Wd(P4),40));dot('y2',700,890,COL.y);go('y2',[[1070,880]],spd(370,.4*Wd(P4),40))});
+ A(at(P4,.4),()=>{go('sp1',[[215,865]],50);say('a','sp1','Acesso não autorizado.',2400);go('sp2',[[1105,865]],50);});
+ A(at(P4,.55),()=>say('a','sp2','Sem autorização. Acesso negado.',2400));
+ A(at(P4,.8),()=>{go('y1',[[-80,900]],spd(270,.2*Wd(P4)+400,40));go('y2',[[500,900]],spd(570,.2*Wd(P4)+400,40));go('sp1',[[300,880]],50);go('sp2',[[1182,880]],50)});
+ A(at(P5,0),()=>tag('t3','Observadores do lado de fora procurando\nvulnerabilidades e oportunidades',700,850,520,915,'#ef4444'));
+ A(at(P6,0),()=>tag('t3','Encontram acessos monitorados, barreiras\nfísicas e procedimentos bem definidos',700,850,520,915,'#ef4444'));
+ A(at(P6,.15),()=>{dot('g3',-40,880,COL.g);go('g3',[[190,880]],spd(230,.3*Wd(P6),40))});
+ A(at(P6,.5),()=>fdOn('f1',1));A(at(P6,.6),()=>{fdOn('f1',0);go('g3',[[190,800],[190,640]],spd(240,.3*Wd(P6),40))});
+ A(at(P7,0),()=>bd('A proteção também está em cada\nentrada de pedestres','#e8a317'));};
+
+SC[12]=function(){car('c',-170,LY,COL.g,null);dot('a',1425,845,COL.v,'AGENTE');
+ const P0='Lembre-se',P1='Foram sugeridas',P2='Segurança coletiva',P3='Contamos';
+ A(at(P0,0),()=>go('c',[[EX,LY],[EX,885]],spd(1730,.85*Wd(P0),300)));
+ A(at(P0,.88),()=>say('a','a','Bom dia!',1800));
+ A(at(P1,0),()=>gate('gE',1));
+ A(at(P1,.1),()=>{go('c',[[EX,590]],spd(295,.35*Wd(P1),90));go('a',[[1440,830],[1440,590]],spd(265,.35*Wd(P1),90))});
+ A(at(P1,.3),()=>bd('Sugerido pela Moked.\nDecidido pelos moradores.','#fff'));
+ A(at(P1,.5),()=>gate('gE',0));A(at(P1,.58),()=>gate('gI',1));
+ A(at(P1,.62),()=>go('c',[[EX,210],[900,210]],spd(980,.38*Wd(P1),100)));
+ A(at(P2,0),()=>bd('Segurança coletiva se faz com a\ncolaboração de todos.','#e8a317'));
+ A(at(P3,0),()=>bd('Contamos com você!','#e8a317'));};
+
 /* voice */
 let VZ=[];function pick(){if(!window.speechSynthesis)return;const sc=v=>(/pt[-_]BR/i.test(v.lang)?4:0)+(/natural|neural|online/i.test(v.name)?5:0)+(/google/i.test(v.name)?3:0)+(/francisca|antonio|thalita|luciana|felipe|microsoft/i.test(v.name)?2:0)+(v.localService?0:1);
  VZ=speechSynthesis.getVoices().filter(v=>/^pt/i.test(v.lang)).sort((a,b)=>sc(b)-sc(a));const s=$('vs'),o=s.value;s.innerHTML='';VZ.forEach(v=>{const p=document.createElement('option');p.value=p.textContent=v.name;s.appendChild(p);});if(o&&VZ.some(v=>v.name===o))s.value=o;}
 if(window.speechSynthesis){pick();speechSynthesis.onvoiceschanged=pick;}
 function chunks(t){const o=[];(t.match(/[^.!?]+[.!?]+/g)||[t]).forEach(s=>{s=s.trim();while(s.length>190){let i=s.lastIndexOf(', ',150);if(i<40)i=s.lastIndexOf(' ',150);o.push(s.slice(0,i+1).trim());s=s.slice(i+1).trim();}o.push(s)});return o;}
-function speak(ch,my){let i=0;(function nx(){if(my!==tokS)return;if(i>=ch.length){sdone=true;return;}CKF(i);sub(ch[i]);const u=new SpeechSynthesisUtterance(ch[i++]);u.lang='pt-BR';u.rate=Math.min(2,.97*SP);const v=VZ.find(x=>x.name===$('vs').value);if(v)u.voice=v;u.onend=nx;u.onerror=nx;speechSynthesis.speak(u);})();}
+function setNP(k){NP=k;sub(CHK[k]);CKF(k);}
+function speak(ch,my){let i=0;(function nx(){if(my!==tokS)return;
+  if(i>0){const w=CST[i]-CST[i-1];if(w>0)RT=Math.max(.5,Math.min(2.5,.5*RT+.5*(EL*SP/w)));}
+  if(i>=ch.length){sdone=true;return;}NK=i;EL=0;setNP(i);
+  const u=new SpeechSynthesisUtterance(ch[i++]);u.lang='pt-BR';u.rate=Math.min(2,.97*SP);const v=VZ.find(x=>x.name===$('vs').value);if(v)u.voice=v;u.onstart=()=>{if(my===tokS)EL=0;};u.onend=nx;u.onerror=nx;speechSynthesis.speak(u);})();}
 /* player */
 function stop(){run=false;tokS++;if(window.speechSynthesis)speechSynthesis.cancel();if(AE){AE.pause();AE=null;}}
-function play(i){stop();cur=i;started=1;reset();SC[i]();
+function play(i){stop();cur=i;started=1;reset();
  const beats=Array.isArray(N[i])?N[i]:[N[i]],ch=[],bs={};beats.forEach((b,j)=>{bs[ch.length]=j;chunks(b).forEach(c=>ch.push(c));});
+ CHK=ch;CST=[];let cum=0;ch.forEach(c=>{CST.push(cum);cum+=c.length*MS0+GAP;});CEND=cum;
  CKF=k=>{if(bs[k]!==undefined&&BF[bs[k]])BF[bs[k]]();};
- const au=(typeof AUD!=='undefined')&&AUD[i+1],vz=!au&&$('vz').checked&&window.speechSynthesis;let cum=0;sdone=!vz;K=1;
- if(!vz)ch.forEach((c,k)=>{const t=cum;A(t,()=>{sub(c);CKF(k)});cum+=c.length*62+300;});
- Q.sort((a,b)=>a[0]-b[0]);lastT=Math.max(cum,...Q.map(q=>q[0]))+2500;
- chap(i);run=true;$('vp').classList.remove('pz');ui();if(vz)speak(ch,tokS);
- if(au){sdone=false;const a=AE=new Audio(au);a.playbackRate=SP;a.onloadedmetadata=()=>{if(AE===a&&isFinite(a.duration)&&a.duration>1)K=Math.max(.3,Math.min(3,(lastT-2500)/(a.duration*1000)));};a.onended=()=>{if(AE===a)sdone=true;};a.onerror=()=>{if(AE===a)sdone=true;};a.play().catch(()=>{});}}
+ SC[i]();
+ const au=(typeof AUD!=='undefined')&&AUD[i+1],vz=!au&&$('vz').checked&&window.speechSynthesis;
+ MODE=au?'a':(vz?'v':'s');sdone=(MODE==='s');NP=-1;NK=-1;EL=0;RT=1;K=1;
+ Q.sort((a,b)=>a[0]-b[0]);lastT=Math.max(CEND,...Q.map(q=>q[0]))+1500;
+ chap(i);run=true;$('vp').classList.remove('pz');ui();
+ if(MODE==='v')speak(ch,tokS);else setNP(0);
+ if(au){const a=AE=new Audio(au);a.playbackRate=SP;a.onended=()=>{if(AE===a)sdone=true;};a.onerror=()=>{if(AE===a)sdone=true;};a.play().catch(()=>{});}}
+function adv(dt){
+ if(MODE==='v'){EL+=dt;if(NK>=0&&!sdone){const a=CST[NK],b=NK+1<CHK.length?CST[NK+1]:CEND,w=b-a,d=Math.max(300,w*RT/SP),t=a+w*Math.min(.995,EL/d);if(t>T)T=t;}else if(sdone)T+=dt*SP;}
+ else if(MODE==='a'){if(sdone)T+=dt*SP;else if(AE&&isFinite(AE.duration)&&AE.duration>1){const t=AE.currentTime/AE.duration*CEND;if(t>T)T=t;}}
+ else T+=dt*SP;
+ if(MODE!=='v')while(NP+1<CHK.length&&CST[NP+1]<=T)setNP(NP+1);}
 function ui(){$('pp').textContent=run?'Pausar':(started?'Continuar':'Reproduzir');[...$('ls').children].forEach((b,i)=>b.classList.toggle('on',i===cur));$('pg').style.width=((cur+(run?.5:0))/N.length*100)+'%';}
 function done(){if(cur<N.length-1)play(cur+1);else{run=false;started=0;ui();}}
 function tick(){if(!run)return;while(qi<Q.length&&Q[qi][0]<=T){Q[qi][1]();qi++;}
@@ -373,7 +574,7 @@ function tick(){if(!run)return;while(qi<Q.length&&Q[qi][0]<=T){Q[qi][1]();qi++;}
  if(patrolOn)for(const id in PA){const a=PA[id];if(a.n<=T&&E[id]){const m=go(id,[a.p],50);DQ.push([T+m+1500,()=>{if(E[id])go(id,[a.h],50)}]);a.n=T+m*2+1500+(id==='sp1'?5000:7500);}}
  if(qi>=Q.length&&!TW.length&&sdone&&T>lastT)done();}
 let last=performance.now();
-(function loop(n){if(run)T+=Math.min(50,n-last)*SP*K;last=n;tick();requestAnimationFrame(loop);})(last);
+(function loop(n){if(run)adv(Math.min(50,n-last));last=n;tick();requestAnimationFrame(loop);})(last);
 $('pp').onclick=()=>{if(run){run=false;$('vp').classList.add('pz');if(window.speechSynthesis)speechSynthesis.pause();if(AE)AE.pause();ui();}else if(started){run=true;$('vp').classList.remove('pz');if(window.speechSynthesis)speechSynthesis.resume();if(AE)AE.play().catch(()=>{});ui();}else play(cur);};
 $('pv').onclick=()=>play(Math.max(0,cur-1));$('nx').onclick=()=>play(Math.min(N.length-1,cur+1));
 NAMES.forEach((n,i)=>{const b=document.createElement('button');b.textContent=(i+1)+'. '+n;b.onclick=()=>play(i);$('ls').appendChild(b);});
