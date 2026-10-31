@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>POP CDA — Acesso de Veículos (vídeo explicativo)</title>
+<style>
+:root{--bg:#eef2f8;--card:#fff;--tx:#0f1b2d;--bd:#d5dce8;--ac:#0b3a6e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1220;--card:#121c2e;--tx:#e6ecf5;--bd:#25324a;--ac:#5b9bf0}}
+:root[data-theme="dark"]{--bg:#0b1220;--card:#121c2e;--tx:#e6ecf5;--bd:#25324a;--ac:#5b9bf0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Segoe UI",Roboto,Arial,sans-serif}
+main{max-width:1500px;margin:0 auto;padding:12px}
+#vp{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#000;border-radius:8px}
+#vp:fullscreen{aspect-ratio:auto;border-radius:0}
+#fr{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+svg text{font-family:"Segoe UI",Roboto,Arial,sans-serif}
+.ol{paint-order:stroke;stroke:#0b1220;stroke-width:4px;stroke-linejoin:round}
+.fx{transition:opacity .5s}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.1}}
+.blink{animation:bl .6s steps(1,end) infinite}
+#vp.pz .blink{animation-play-state:paused}
+.prog{height:5px;background:var(--bd);border-radius:3px;margin:10px 0}
+.prog i{display:block;height:100%;width:0;background:#e8a317;border-radius:3px;transition:width .4s}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+button{font:inherit;font-size:14px;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:8px 14px;border-radius:6px;cursor:pointer}
+button.p{background:#0b3a6e;color:#fff;border-color:#0b3a6e;min-width:120px}
+label{font-size:13.5px;display:flex;gap:6px;align-items:center}
+select{font:inherit;font-size:13px;max-width:240px;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:6px;padding:7px}
+.list{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px}
+.list button{text-align:left;font-size:13px}
+.list button.on{border-color:#e8a317;box-shadow:inset 4px 0 0 #e8a317;font-weight:600}
+small{display:block;margin-top:10px;font-size:12px;opacity:.75}
+[hidden]{display:none!important}
+.spd{display:flex;gap:4px;align-items:center;font-size:13.5px;flex-wrap:wrap}.spd button{padding:7px 10px;min-width:46px}
+.spd button.on{background:#e8a317;border-color:#e8a317;color:#0b1220;font-weight:700}
+.ov{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
+.bx{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:24px;width:100%;max-width:380px;display:flex;flex-direction:column;gap:10px}
+.bx h2{margin:0;font-size:20px;color:var(--ac)}.bx p{margin:0;font-size:14px;opacity:.8}
+input[type=text],input[type=email],input[type=password]{font:inherit;padding:10px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx)}
+.lk{background:none;border:0;color:var(--ac);text-decoration:underline;padding:4px}
+.ms{font-size:13px;min-height:18px}
+.adm{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:14px;margin-top:12px}
+.adm table{width:100%;border-collapse:collapse;font-size:13.5px}.adm th,.adm td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--bd)}
+.adm .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:6px 0;border-bottom:1px solid var(--bd);font-size:13.5px}
+.chip{font-size:13px;opacity:.85}
+</style></head><body><main>
+<div id="vp"><div id="fr">
+<svg id="sv" viewBox="0 0 1920 1080" width="1920" height="1080">
+<defs><pattern id="h" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="16" height="16" fill="#142340"/><line x1="0" y1="0" x2="0" y2="16" stroke="#1f3a66" stroke-width="5"/></pattern></defs>
+<rect width="1920" height="1080" fill="#0f1b2d"/>
+<rect x="60" y="100" width="1620" height="700" rx="6" fill="#13203a" stroke="#2c4a7a" stroke-width="2"/>
+<rect x="60" y="100" width="1620" height="230" fill="#16253b" stroke="#2c4a7a" stroke-width="2"/>
+<text x="1000" y="140" fill="#7f93b3" font-size="20" text-anchor="middle" letter-spacing="4">ACESSO À GARAGEM</text>
+<text x="720" y="660" fill="#6b7f9f" font-size="24" text-anchor="middle" letter-spacing="5">ÁREA INTERNA DO CONDOMÍNIO</text>
+<rect x="1380" y="330" width="240" height="470" fill="url(#h)" stroke="#3b82f6" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="1500" y="366" fill="#93c5fd" font-size="15" font-weight="700" text-anchor="middle">ECLUSA · ZONA CONTROLADA</text>
+<text x="1500" y="386" fill="#93c5fd" font-size="13" text-anchor="middle">(ainda é considerada rua)</text>
+<rect y="800" width="1920" height="100" fill="#17233a"/><text x="1790" y="880" fill="#5f7394" font-size="16" letter-spacing="3" text-anchor="middle">CALÇADA</text>
+<rect y="900" width="1920" height="90" fill="#1c2b42"/>
+<line x1="0" y1="945" x2="1920" y2="945" stroke="#4a5d7a" stroke-width="3" stroke-dasharray="30 20"/>
+<text x="30" y="924" fill="#7f93b3" font-size="17" letter-spacing="3">RUA CLODOMIRO AMAZONAS</text>
+<rect x="155" y="765" width="70" height="70" rx="4" fill="#2563eb" fill-opacity=".45" stroke="#60a5fa" stroke-width="3"/>
+<rect x="1035" y="765" width="70" height="70" rx="4" fill="#10b981" fill-opacity=".4" stroke="#34d399" stroke-width="3"/>
+<rect x="760" y="690" width="230" height="110" rx="5" fill="#13294b" stroke="#5b8def" stroke-width="2"/>
+<text x="875" y="714" fill="#cbd9ee" font-size="16" font-weight="700" text-anchor="middle" letter-spacing="1">PORTARIA / CCO</text>
+<rect id="scB" x="775" y="724" width="200" height="66" rx="4" fill="#0b1220" stroke="#475569" stroke-width="2.5"/>
+<g id="scI" opacity="0"><circle cx="800" cy="750" r="11" fill="#22c55e"/><path d="M780 782a20 14 0 0 1 40 0z" fill="#22c55e"/></g>
+<text id="scT" x="825" y="762" fill="#e2e8f0" font-size="14" font-weight="700">Monitorando</text>
+<g id="G0"></g><g id="LC"></g>
+<rect id="gE" x="1380" y="796" width="240" height="9" rx="3" fill="#f59e0b" stroke="#0b1220"/>
+<rect id="gI" x="1380" y="326" width="240" height="9" rx="3" fill="#f59e0b" stroke="#0b1220"/>
+<g id="LE"></g><g id="LB"></g><g id="LT"></g>
+<text id="bn" class="ol fx" x="480" y="440" font-size="34" font-weight="800" fill="#fff" text-anchor="middle" opacity="0"></text>
+<g id="PN1"></g><g id="PN2"></g><g id="LG"></g>
+<rect width="1920" height="70" fill="#0b2545"/><rect y="68" width="1920" height="4" fill="#e8a317"/><g id="CB"></g>
+<rect y="990" width="1920" height="90" fill="#050a14" fill-opacity=".93"/><rect y="990" width="1920" height="3" fill="#e8a317"/>
+<text x="24" y="1012" fill="#e8a317" font-size="13" font-weight="700" letter-spacing="3">NARRAÇÃO</text>
+<text id="sb" x="960" y="1040" fill="#fff" font-size="27" font-weight="600" text-anchor="middle"></text>
+<circle cx="1868" cy="36" r="30" fill="#fff" fill-opacity=".92"/>
+<image href="data:image/png;base64,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" x="1840" y="8" width="56" height="56" opacity=".95"/>
+</svg></div></div>
+<div class="prog"><i id="pg"></i></div>
+<div class="bar"><button class="p" id="pp">Reproduzir</button><button id="pv">Anterior</button><button id="nx">Próxima</button>
+<label><input type="checkbox" id="vz" checked> Narração em voz</label><select id="vs" aria-label="Voz"></select><label><input type="checkbox" id="lgd" checked> Legendas</label>
+<span class="spd" id="spd"><b>Velocidade:</b></span>
+<button id="fs">Tela cheia</button><button id="adm" hidden>Painel do administrador</button><span class="chip" id="usr"></span><button id="sai" hidden>Sair</button></div>
+<section class="adm" id="admp" hidden></section>
+<div class="list" id="ls"></div>
+<small>Quadro de 1920 × 1080. Para exportar o vídeo, use Tela cheia (monitor Full HD) com um gravador de tela. A voz depende do navegador; Edge e Chrome têm as vozes mais naturais.</small>
+</main>
+<script>
+const NS='http://www.w3.org/2000/svg',$=i=>document.getElementById(i);
+const EX=1500,LY=945,COL={g:'#22c55e',y:'#facc15',r:'#ef4444',v:'#8b5cf6'};
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+const NAMES=['Por que existe','Do TAG ao controle','Critério objetivo','1 · Sozinho, sem pânico','2 · Sozinho, pânico','3 · Desconhecido, sem pânico','4 · Conhecido, pânico','5 · Desconhecido, pânico','Ameaça e alerta LED','6 · Terceiros, sem controle','Risco e respostas do POP','Pedestres e serviços','Encerramento'];
+/* static drawing */
+function pill(x,y,t){const w=t.length*8.6+18;el('rect',{x:x-w/2,y:y-13,width:w,height:26,rx:4,fill:'#fff','fill-opacity':.93},$('G0'));const e=el('text',{x,y:y+5,'text-anchor':'middle','font-size':14,'font-weight':700,fill:'#0f1b2d'},$('G0'));e.textContent=t;}
+[[1700,822,'Portão externo'],[1700,340,'Portão interno'],[1700,560,'Eclusa de veículos'],[190,690,'Acesso social · morador'],[1070,690,'Pedestres e serviços']].forEach(a=>pill(...a));
+function fd(id,x,y,w,h){const g=el('g',{id},$('G0'));el('rect',{x:x-w/2,y:y-h/2,width:w,height:h,rx:5,fill:'#1e293b',stroke:'#e2e8f0','stroke-width':2},g);el('circle',{cx:x,cy:y,r:6,fill:'none',stroke:'#94a3b8','stroke-width':2.5},g);const t=el('text',{x,y:y-h/2-7,'text-anchor':'middle','font-size':12,'font-weight':700,fill:'#cbd5e1'},g);t.textContent='FACIAL';}
+fd('f1',262,845,40,30);fd('f2',1142,845,40,30);fd('f3',1393,567,18,44);
+function fdOn(id,on){const r=$(id).children[0];r.setAttribute('fill',on?'#16a34a':'#1e293b');r.setAttribute('stroke',on?'#86efac':'#e2e8f0');}
+[[100,822,'l1'],[1190,822,'l2'],[1330,822,'l3']].forEach(([x,y,i])=>{el('circle',{id:'h'+i,cx:x,cy:y,r:26,fill:'#ef4444',opacity:0},$('G0'));el('circle',{id:i,cx:x,cy:y,r:9,fill:'#334155',stroke:'#fff','stroke-width':2},$('G0'));const t=el('text',{x,y:y+36,'text-anchor':'middle','font-size':13,'font-weight':700,fill:'#fca5a5'},$('G0'));t.textContent='LED';});
+function led(v){['l1','l2','l3'].forEach(i=>{const e=$(i),h=$('h'+i);e.setAttribute('fill',v?'#ef4444':'#334155');e.classList.toggle('blink',!!v);h.classList.toggle('blink',!!v);h.setAttribute('opacity',v?.45:0);});}
+(function(){const g=$('G0');el('text',{x:90,y:128,'font-size':14,'font-weight':700,fill:'#e8a317','letter-spacing':2},g).textContent='LEGENDA';
+[['g','Morador / pessoa conhecida'],['y','Pessoa desconhecida da equipe'],['r','Ameaça confirmada (pisca)'],['v','Equipe de segurança']].forEach((a,i)=>{const y=160+i*36;const c=el('circle',{cx:100,cy:y,r:11,fill:COL[a[0]],stroke:'#fff','stroke-width':2},g);if(a[0]==='r')c.setAttribute('class','blink');el('text',{x:125,y:y+5,'font-size':16,fill:'#e2e8f0'},g).textContent=a[1];});
+el('rect',{x:89,y:285,width:22,height:22,fill:'#2563eb',stroke:'#60a5fa','stroke-width':2},g);el('text',{x:125,y:302,'font-size':16,fill:'#e2e8f0'},g).textContent='Acesso social (morador)';
+NAMES.forEach((n,i)=>{const x=16+(i%7)*254,y=i<7?4:38,g2=el('g',{style:'cursor:pointer'},$('CB'));el('rect',{id:'c'+i,x,y,width:250,height:30,rx:5,fill:'#16315a'},g2);el('text',{id:'ct'+i,x:x+125,y:y+20,'text-anchor':'middle','font-size':14,'font-weight':700,fill:'#cbd9ee'},g2).textContent=(i+1)+'  '+n;g2.onclick=()=>play(i);});})();
+function chap(i){NAMES.forEach((n,k)=>{$('c'+k).setAttribute('fill',k===i?'#e8a317':'#16315a');$('ct'+k).setAttribute('fill',k===i?'#0b1220':'#cbd9ee');});}
+/* engine */
+let SP=1,K=1,AE=null,DQ=[],patrolOn=true,PA={sp1:{h:[300,880],p:[215,880],n:3000},sp2:{h:[1182,880],p:[1110,880],n:5500}},TGR={},CARD=null,BF=[],CKF=()=>{},T=0,run=false,Q=[],qi=0,TW=[],BB=[],TG={},E={},GO={gE:0,gI:0},cur=0,started=0,sdone=true,lastT=0,tokS=0;
+const A=(t,f)=>Q.push([t,f]),ease=k=>k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
+function tw(d,f,dl){TW.push({s:T+(dl||0),d,f});}
+function put(id){const e=E[id];e.g.setAttribute('transform','translate('+e.x+' '+e.y+')'+(e.k==='c'?' rotate('+e.a+')':''));}
+function dot(id,x,y,c,lab){const g=el('g',{},$('LE')),ring=el('circle',{r:22,fill:'none',stroke:c,'stroke-width':3,opacity:0},g),ci=el('circle',{r:12,fill:c,stroke:'#fff','stroke-width':2},g);if(lab)el('text',{y:31,'text-anchor':'middle','font-size':13,'font-weight':700,fill:'#e2e8f0',class:'ol'},g).textContent=lab;E[id]={g,x,y,a:0,k:'d',ring,ci};put(id);}
+function occ(g,x,y,c){const e=el('circle',{cx:x,cy:y,r:10,fill:c||'#000',stroke:'#fff','stroke-width':2,opacity:c?1:0},g);return e;}
+function car(id,x,y,d,p){const g=el('g',{},$('LE'));
+ el('rect',{x:-60,y:-28,width:120,height:56,rx:12,fill:'#cbd5e1',stroke:'#0b1220','stroke-width':2.5},g);
+ el('rect',{x:-34,y:-21,width:62,height:42,rx:9,fill:'#94a3b8'},g);el('rect',{x:24,y:-19,width:10,height:38,rx:3,fill:'#334155'},g);
+ const lt=el('circle',{r:26,fill:'#fde68a',opacity:0,class:'fx'},g),wn=el('g',{opacity:0,class:'fx'},g);
+ el('rect',{x:-6,y:-36,width:34,height:8,fill:'#38bdf8'},wn);el('rect',{x:-6,y:28,width:34,height:8,fill:'#38bdf8'},wn);
+ const tk=el('rect',{x:-92,y:-26,width:34,height:52,rx:4,fill:'#f59e0b',stroke:'#0b1220','stroke-width':2,opacity:0,class:'fx'},g);
+ const hr=el('rect',{x:-102,y:-36,width:54,height:72,rx:9,fill:'none',stroke:'#fde047','stroke-width':4,'stroke-dasharray':'8 5',opacity:0},g);
+ E[id]={g,x,y,a:0,k:'c',lt,wn,tk,hr,od:occ(g,10,-15,d),op:occ(g,10,15,p)};put(id);}
+function cfx(id,v){const e=E[id];[e.lt,e.wn,e.tk].forEach(x=>x.setAttribute('opacity',v?1:0));e.hr.setAttribute('opacity',v?1:0);e.hr.classList.toggle('blink',!!v);}
+function oc(id,w,c,b,p){const o=E[id][w==='d'?'od':'op'];if(c===null){o.setAttribute('opacity',0);return;}o.setAttribute('opacity',1);o.setAttribute('fill',c);o.classList.toggle('blink',!!b);if(p&&!b){o.classList.add('blink');tw(1800,r=>{if(r>=1)o.classList.remove('blink')});}}
+function setCol(id,c){const e=E[id];e.ci.setAttribute('fill',c);e.ring.setAttribute('stroke',c);hl(id,1);tw(1800,r=>{if(r>=1&&E[id]===e)hl(id,0)});}
+function hl(id,on){const r=E[id].ring;r.setAttribute('opacity',on?1:0);r.classList.toggle('blink',!!on);}
+function rm(id){E[id].g.remove();delete E[id];}
+function seg(id,x0,y0,x1,y1,d,dl,lin){const e=E[id],a1=Math.atan2(y1-y0,x1-x0)*180/Math.PI;
+ tw(d,r=>{const k=lin?r:ease(r);e.x=x0+(x1-x0)*k;e.y=y0+(y1-y0)*k;if(e.k==='c'){const df=((a1-e.a+540)%360)-180;e.a+=df*(r>=1?1:.12);}put(id);},dl);}
+function go(id,pts,spd){const e=E[id];let x=e.x,y=e.y,dl=0;pts.forEach(p=>{const L=Math.hypot(p[0]-x,p[1]-y),d=Math.max(80,L/spd*1000);seg(id,x,y,p[0],p[1],d,dl,pts.length>1);dl+=d;x=p[0];y=p[1];});return dl;}
+function gate(i,o){const f=GO[i];tw(1000,r=>{GO[i]=f+(o-f)*ease(r);$(i).setAttribute('width',240*(1-.92*GO[i]));});}
+const W={a:['AGENTE','#4c1d95','#c4b5fd'],m:['MORADOR','#14532d','#4ade80'],p:['PORTARIA / CCO','#134e4a','#2dd4bf'],u:['DESCONHECIDO','#713f12','#facc15'],o:['PROPRIETÁRIO (por telefone)','#14532d','#4ade80']};
+function wrapT(t,n){const w=t.split(' '),l=[];let c='';w.forEach(x=>{if((c+' '+x).trim().length>n){l.push(c);c=x}else c=(c+' '+x).trim()});if(c)l.push(c);return l;}
+function hit(a,b,m){return a.x<b.x+b.w+m&&a.x+a.w+m>b.x&&a.y<b.y+b.h+m&&a.y+a.h+m>b.y;}
+function obs(self){const o=[];BB.forEach(b=>o.push(b.r));Object.values(TGR).forEach(r=>o.push(r));if(CARD)o.push(CARD);o.push({x:80,y:110,w:280,h:215});if($('bn').getAttribute('opacity')==='1')o.push({x:90,y:405,w:800,h:100});
+ for(const k in E){if(k===self)continue;const e=E[k];if(e.k==='c'){const v=Math.abs(Math.sin(e.a*Math.PI/180))>.7;o.push({x:e.x-(v?35:75),y:e.y-(v?75:35),w:v?70:150,h:v?150:70});}else o.push({x:e.x-28,y:e.y-28,w:56,h:62});}
+ return o;}
+function an(id){const p=id.split(':'),b=E[p[0]];if(!p[1])return b;const r=b.a*Math.PI/180,ly=p[1]==='d'?-15:15;return{x:b.x+10*Math.cos(r)-ly*Math.sin(r),y:b.y+10*Math.sin(r)+ly*Math.cos(r)};}
+function say(w,id,t,ms){const [nm,c,s]=W[w],e=id==='P'?{x:875,y:706}:an(id),L=wrapT(t,27),h=L.length*24+42,bw=330,ob=obs(id==='P'?'':id.split(':')[0]);
+ const C=[[e.x-bw/2,e.y-h-40],[e.x+36,e.y-h/2],[e.x-bw-36,e.y-h/2],[e.x-bw/2,e.y+46],[e.x+36,e.y-h-40],[e.x-bw-36,e.y-h-40],[e.x+36,e.y+46],[e.x-bw-36,e.y+46],[e.x-bw/2,e.y-h-120],[e.x-bw/2,e.y+126],[e.x+36,e.y-h-120],[e.x-bw-36,e.y+126]];
+ let best=null,bs=1e9;
+ for(const p of C){const x=Math.max(10,Math.min(1910-bw,p[0])),y=Math.max(106,Math.min(985-h,p[1])),r={x,y,w:bw,h};
+  if(e.x>x-26&&e.x<x+bw+26&&e.y>y-26&&e.y<y+h+26)continue;
+  const n=ob.filter(o=>hit(r,o,8)).length;if(n<bs){bs=n;best=r;if(!n)break;}}
+ if(!best)best={x:Math.max(10,e.x-bw/2),y:Math.max(106,e.y-h-40),w:bw,h};
+ const {x,y}=best,g=el('g',{},$('LB'));let bx,by,hz=true;
+ if(e.y>=y+h){bx=Math.max(x+24,Math.min(x+bw-24,e.x));by=y+h;}else if(e.y<=y){bx=Math.max(x+24,Math.min(x+bw-24,e.x));by=y;}
+ else{hz=false;by=Math.max(y+16,Math.min(y+h-16,e.y));bx=e.x>=x+bw?x+bw:x;}
+ const dx=bx-e.x,dy=by-e.y,d=Math.hypot(dx,dy)||1,tx=e.x+dx/d*18,ty=e.y+dy/d*18;
+ el('polygon',{points:hz?(bx-11)+','+by+' '+(bx+11)+','+by+' '+tx+','+ty:bx+','+(by-11)+' '+bx+','+(by+11)+' '+tx+','+ty,fill:c,stroke:s,'stroke-width':2},g);
+ el('rect',{x,y,width:bw,height:h,rx:9,fill:c,stroke:s,'stroke-width':2},g);
+ el('text',{x:x+14,y:y+22,'font-size':13,'font-weight':800,fill:s,'letter-spacing':1},g).textContent=nm;
+ L.forEach((l,i)=>el('text',{x:x+14,y:y+46+i*24,'font-size':19,'font-weight':600,fill:'#fff'},g).textContent=l);
+ BB.push({g,u:T+ms,r:best});}
+function tag(k,t,cx,cy,tx,ty,c){if(TG[k]){TG[k].remove();delete TG[k];}delete TGR[k];if(!t)return;c=c||'#e8a317';
+ const L=t.split('\n'),w=Math.max(...L.map(s=>s.length))*9.3+30,h=L.length*25+14,g=el('g',{},$('LT'));
+ if(tx!=null){el('line',{x1:tx>cx?cx+w/2:cx-w/2,y1:cy,x2:tx,y2:ty,stroke:c,'stroke-width':2.5},g);el('circle',{cx:tx,cy:ty,r:5,fill:c},g);}
+ el('rect',{x:cx-w/2,y:cy-h/2,width:w,height:h,rx:8,fill:'#0b2545','fill-opacity':.95,stroke:c,'stroke-width':2},g);
+ L.forEach((s,i)=>el('text',{x:cx,y:cy-h/2+24+i*25,'text-anchor':'middle','font-size':17,'font-weight':i?600:800,fill:i?'#fff':c},g).textContent=s);TG[k]=g;TGR[k]={x:cx-w/2,y:cy-h/2,w,h};}
+function bd(t,c,bk){const b=$('bn');b.innerHTML='';b.classList.toggle('blink',!!bk);if(!t){b.setAttribute('opacity',0);return;}b.setAttribute('fill',c||'#fff');t.split('\n').forEach((s,i)=>{const e=el('tspan',{x:480,dy:i?42:0},b);e.textContent=s;});b.setAttribute('opacity',1);}
+function sub(t){const s=$('sb');s.innerHTML='';wrapT(t,92).slice(0,2).forEach((l,i)=>{const e=el('tspan',{x:960,y:1040+i*32},s);e.textContent=l;});}
+function scr(t,c,ic){$('scT').textContent=t;$('scT').setAttribute('fill',c==='#475569'?'#e2e8f0':c);$('scB').setAttribute('stroke',c);$('scI').setAttribute('opacity',ic?1:0);}
+function reset(){['LE','LB','LT','LC','PN1','PN2'].forEach(i=>$(i).innerHTML='');TW=[];BB=[];TG={};TGR={};CARD=null;BF=[];E={};Q=[];qi=0;T=0;
+ ['gE','gI'].forEach(i=>{GO[i]=0;$(i).setAttribute('width',240);});led(0);['f1','f2','f3'].forEach(i=>fdOn(i,0));scr('Monitorando','#475569',0);bd('');sub('');
+ dot('sp1',300,880,COL.v,'AGENTE');dot('sp2',1182,880,COL.v,'AGENTE');DQ=[];patrolOn=true;PA.sp1.n=3000;PA.sp2.n=5500;}
+/* shared sequences */
+function open_(o){
+ car('c',-170,LY,COL[o.d||'g'],o.p?COL[o.p]:null);dot('a',1425,845,COL.v,'AGENTE');go('c',[[EX,LY],[EX,885]],400);
+ A(400,()=>{hl('a',1);tag('t1','AGENTE EXTERNO\n1ª camada: triagem na rua',1260,830,1413,848,COL.v)});
+ A(4700,()=>say('a','a','Bom dia!',2000));
+ A(6200,()=>o.nc?say('u','c:d','Bom dia! Vim visitar o morador André, que está aqui comigo.',3400):say('m','c','Acionei o controle!',2000));
+ A(7400,()=>{if(o.nc)say('p','P','Sem controle: abrindo o portão externo.',2200);if(o.pan)scr('PÂNICO ACIONADO','#ef4444',0);gate('gE',1)});
+ A(8800,()=>{hl('a',0);tag('t1');go('c',[[EX,590]],100);go('a',[[1440,830],[1440,590]],90)});
+ A(11800,()=>{gate('gE',0);tag('t2','TRIAGEM DENTRO DA ECLUSA\nZona controlada, ainda considerada rua:\nlocal seguro, mais uma camada',1060,480,1380,520,'#60a5fa')});
+ return 13000;}
+function face(){fdOn('f3',1);scr('MORADOR identificado','#22c55e',1);tag('t3','FACIAL VALIDADA\nFoto do morador sobe na portaria',1060,650,1386,570,'#22c55e');}
+function panel(id,x,y,w,ti,rows,c){const g=$(id);g.innerHTML='';delete TGR[id];if(!ti)return;const h=rows.length*30+54;
+ el('rect',{x,y,width:w,height:h,rx:10,fill:'#0b2545','fill-opacity':.96,stroke:c,'stroke-width':3},g);
+ el('text',{x:x+18,y:y+30,'font-size':17,'font-weight':800,fill:c,'letter-spacing':1},g).textContent=ti;
+ rows.forEach((r,i)=>el('text',{x:x+18,y:y+62+i*30,'font-size':17,'font-weight':600,fill:r[1]||'#fff'},g).textContent=r[0]);
+ TGR[id]={x,y,w,h};}
+function flash(on){if(TG.fl){TG.fl.remove();delete TG.fl;}if(on)TG.fl=el('rect',{x:62,y:102,width:1616,height:696,rx:6,fill:'none',stroke:'#ef4444','stroke-width':10,class:'blink'},$('LT'));}
+function cstep(n){const R=['Alerta de pânico recebido da portaria (remoto)','Abre as imagens das câmeras','Contata a equipe de segurança','Aciona a PM e dá apoio'];
+ panel('PN1',400,150,480,'CENTRAL 24 H · ALERTA REMOTO',R.slice(0,n).map(r=>['● '+r]),'#ef4444');}
+function pstep(n,done){const R=[];for(let i=0;i<n;i++){const ok=i<n-1||done;R.push([(i?'Resp. '+i+' da segurança':'Polícia Militar')+' · '+(ok?'contatado':'ligando…'),ok?'#86efac':'#fde68a']);}
+ panel('PN2',900,150,470,'PLANO DE CHAMADA · PORTARIA',R,'#e8a317');}
+const VST1='VIDROS BAIXOS · SENHA CORRETA\nSem porta-malas e sem luz interna:\nnão é acesso de pânico';
+const VST='PORTA-MALAS ABERTO · VIDROS BAIXOS\nVistoria completa: veículo de terceiros\nsem controle, sem como sinalizar pânico';
+function wipe(){['LB','LT'].forEach(i=>$(i).innerHTML='');TG={};TGR={};BB=[];['f1','f2','f3'].forEach(i=>fdOn(i,0));scr('Monitorando','#475569',0);gate('gE',0);gate('gI',0);['c','a','v'].forEach(i=>{if(E[i])rm(i)});}
+function tri(t,line,tg,o){A(t,()=>{say('a','a',line||'Abra os vidros, acenda a luz interna e abra o porta-malas, por favor.',3600);if(o)E.c.wn.setAttribute('opacity',1);else cfx('c',1);
+  tag('tm',tg||'PORTA-MALAS ABERTO · VIDROS BAIXOS\nProcedimento de pânico: abertura do\nporta-malas e luz interna acesa',1010,572,1440,668,'#fde047')});
+ A(t+1500,()=>go('a',[[1440,700],[1560,700],[1560,590]],68));return t+7000;}
+function rel(t,cl,v){if(cl){A(t,()=>{if(!v)say('a','a','Pode fechar o porta-malas e os vidros, por favor.',3000);tag('tm',v?'FECHANDO OS VIDROS\nAntes de entrar na garagem':'ATENÇÃO: FECHAR O PORTA-MALAS\nO veículo não pode entrar na garagem\ncom o porta-malas aberto',1010,572,1440,668,'#f59e0b')});
+  A(t+2200,()=>{cfx('c',0);tag('tm',v?'VIDROS FECHADOS\nLiberado para entrar na garagem':'PORTA-MALAS FECHADO\nLiberado para entrar na garagem',1010,572,1440,668,'#22c55e')});
+  A(t+4600,()=>tag('tm'));t+=4800;}
+ A(t,()=>{say('p','P','Identidade confirmada. Liberando o portão interno.',2600);scr('Portão interno liberado','#2dd4bf',1);tag('t4','2ª CAMADA DE PROTEÇÃO\nPortão interno',1080,385,1380,333,'#2dd4bf');gate('gI',1)});
+ A(t+1400,()=>go('c',[[EX,210],[900,210]],300));return t+5200;}
+/* scenes */
+function card(ti,rows){const g=$('LC');g.innerHTML='';CARD=null;if(!ti)return;const X=100,Y=340,Wd=1190,L=[];let y=64;
+ rows.forEach(r=>{if(r[0]==='r'){const a=wrapT(r[1],30),b=wrapT(r[2],60),n=Math.max(a.length,b.length);L.push({k:'r',a,b,y,lh:25});y+=n*25+14;}else{const ls=wrapT(r[1],84);L.push({k:r[0],ls,y});y+=ls.length*30+12;}});
+ const h=y+10;el('rect',{x:X,y:Y,width:Wd,height:h,rx:10,fill:'#0b2545','fill-opacity':.96,stroke:'#e8a317','stroke-width':2.5},g);
+ el('text',{x:X+24,y:Y+36,'font-size':19,'font-weight':800,fill:'#e8a317','letter-spacing':2},g).textContent=ti;
+ L.forEach(r=>{if(r.k==='r'){r.a.forEach((l,i)=>el('text',{x:X+24,y:Y+r.y+i*25+20,'font-size':19,'font-weight':800,fill:'#e8a317'},g).textContent=l);r.b.forEach((l,i)=>el('text',{x:X+440,y:Y+r.y+i*25+20,'font-size':19,'font-weight':600,fill:'#fff'},g).textContent=l);}
+  else r.ls.forEach((l,i)=>el('text',{x:X+24,y:Y+r.y+i*30+22,'font-size':22,'font-weight':r.k==='q'?600:500,'font-style':r.k==='q'?'italic':'normal',fill:r.k==='q'?'#fcd34d':'#fff'},g).textContent=l);});
+ CARD={x:X,y:Y,w:Wd,h};}
+const N=[
+"Olá, morador! Você já parou para pensar no que leva um criminoso a escolher determinado local para agir? Muitas vezes, a resposta está em dois fatores: oportunidade e facilidade. Ele procura acessos vulneráveis, poucas barreiras e situações em que a entrada possa acontecer sem uma triagem adequada. É justamente para reduzir essas oportunidades que as camadas de proteção do nosso condomínio foram tecnicamente recomendadas pela Moked e, posteriormente, discutidas e aprovadas pelo conselho de moradores. Mas é importante entender um ponto: o objetivo não é burocratizar a sua rotina, nem criar obstáculos desnecessários no seu dia a dia. O verdadeiro propósito é proteger todos os moradores. A segurança do condomínio não depende apenas de quem entra, mas também de como essa entrada é realizada e de quais medidas existem para identificar possíveis riscos antes que seja tarde. Cada etapa do processo tem uma função: reduzir vulnerabilidades, ampliar a capacidade de prevenção e evitar que uma situação de risco ultrapasse os limites do condomínio. Mais do que controlar acessos, estamos protegendo pessoas, famílias e lares. E essa proteção começa com a participação consciente de cada morador.",
+"Antes, o morador utilizava apenas a TAG para acessar o condomínio. Ao se aproximar, o portão externo abria automaticamente. A triagem era feita apenas por uma verificação visual na rua, sem um controle efetivo sobre o que acontecia durante o acesso. Imagine a seguinte situação. Um morador chega acompanhado de um passageiro. A equipe de segurança não identifica nenhuma suspeita naquele primeiro momento. A TAG libera a entrada. O veículo entra na eclusa. O morador realiza o reconhecimento facial e, em seguida, o portão interno abre automaticamente. O veículo passa. Mas, logo depois, o passageiro apresenta um alerta vermelho. Existe uma ameaça dentro do condomínio. E o mais preocupante é que, até aquele momento, a equipe de segurança não teve a oportunidade de impedir a entrada. Agora, veja como funciona o novo procedimento. Com o controle linear anticlonagem, o acesso deixa de depender apenas de uma liberação automática. O morador precisa realizar uma ação consciente, adicionando uma nova camada de segurança ao processo. O veículo entra na eclusa e passa pela triagem normal. O agente realiza a vistoria e o reconhecimento facial. Mas existe uma diferença fundamental. O reconhecimento facial, por si só, não libera o portão interno. A abertura depende do comando do agente de segurança, que solicita à portaria a autorização para liberar o acesso. Dessa forma, o veículo permanece dentro da eclusa até que a liberação seja confirmada. E é justamente nesse momento que a segurança faz a diferença. Se alguma irregularidade for identificada, a equipe ainda tem a oportunidade de agir antes que o veículo entre no condomínio. Mais controle, mais uma camada de proteção e uma oportunidade real de impedir que uma ameaça ultrapasse os limites do condomínio.",
+["O sistema foi implantado para padronizar a entrada de veículos. O primeiro acionamento permite o acesso à eclusa e a realização da triagem. Quando o acionamento é usado na condição de pânico, o procedimento muda. A equipe realiza a abordagem e a verificação do veículo, conforme o protocolo.",
+ "A presença de uma pessoa desconhecida no veículo não significa que ela seja uma ameaça. Significa que existe uma condição diferente, que precisa ser tratada conforme o procedimento.",
+ "Mas o morador conhece a pessoa. Por que tratar como uma situação diferente? Porque o procedimento não é baseado em julgamento pessoal sobre quem é confiável. Ele estabelece critérios objetivos para a equipe agir de maneira padronizada. O morador pode conhecer o acompanhante, mas a equipe não conhece e precisa cumprir o protocolo definido para aquela condição.",
+ "Não estamos dizendo que a pessoa é uma ameaça. Estamos dizendo que a situação exige um procedimento específico."],
+"Primeira condição. O morador está sozinho, com o controle, e aciona o botão sem pânico. O agente acessa a eclusa e faz o visual ao redor do veículo, dando a volta completa. Em seguida, o morador faz a validação facial, e o agente solicita à portaria a abertura do portão interno. Após a liberação, o veículo acessa o condomínio.",
+"Segunda condição. O morador está sozinho e aciona o botão de pânico. O agente acessa a eclusa. Em seguida, o morador faz a validação facial. O agente solicita que o porta-malas seja aberto, que a luz interna seja acesa e que os vidros permaneçam abertos. Não havendo suspeitos, o agente verifica com o morador o motivo do acionamento, que pode ter ocorrido por engano. Antes da liberação, o porta-malas é fechado. Após a conclusão do procedimento, o acesso pode ser liberado.",
+"Terceira condição. O morador está acompanhado de uma pessoa desconhecida pela equipe de segurança e aciona o botão sem pânico. O agente acessa a eclusa. Em seguida, o morador realiza a validação facial. Após a validação, o agente solicita à portaria a abertura do portão interno. O acompanhante continua sinalizado em amarelo, pois ainda não é conhecido pela equipe de segurança. Isso não significa que exista uma ameaça, mas indica que se trata de uma condição diferente, que deve ser registrada conforme o procedimento.",
+"Quarta condição. O morador está acompanhado de uma pessoa conhecida pela equipe de segurança e aciona o botão de pânico. O agente acessa a eclusa. Em seguida, o morador realiza a validação facial. O agente solicita a abertura do porta-malas, o acionamento da luz interna e a abertura dos vidros do veículo. Durante a verificação, o agente confirma com o morador o motivo do acionamento do pânico, que pode ter ocorrido por engano. Não havendo suspeitos, o porta-malas é fechado e o agente solicita à portaria a abertura do portão interno. Após a liberação, o veículo acessa o condomínio.",
+"Quinta condição. O morador está acompanhado de uma pessoa desconhecida pela equipe de segurança e aciona o botão de pânico. O agente acessa a eclusa. Em seguida, o morador realiza a validação facial. O agente informa à portaria que há uma pessoa desconhecida no veículo e solicita a abertura do portão externo para que o acompanhante saia e realize o cadastro na portaria. Após a saída do acompanhante, o agente inicia a vistoria do veículo, solicitando a abertura do porta-malas e realizando a dupla checagem com o morador. Estando tudo em ordem, o porta-malas é fechado e a sinalização do acompanhante muda de amarelo para verde. O visitante é então liberado para acessar o condomínio pela entrada de pedestres, enquanto o veículo recebe autorização para entrar pelo portão interno. Dessa forma, todas as etapas de segurança são cumpridas antes da liberação do acesso.",
+"Quando a portaria confirma uma situação real de pânico e aciona a Polícia Militar, o passageiro, que antes estava sinalizado em amarelo, passa a ficar vermelho e piscando. Isso indica uma ameaça confirmada. Ao identificar e confirmar a situação de pânico, a portaria também dispara um alerta remoto para a central de monitoramento 24 horas. A central, então, abre as imagens do condomínio, entra em contato com a equipe de segurança e aciona a Polícia Militar, prestando todo o apoio necessário. Paralelamente, a portaria inicia o plano de chamada, entrando em contato com a Polícia Militar e com os responsáveis pela segurança do condomínio. Nesse cenário, a equipe libera o portão externo para permitir a saída da ameaça. Porém, a entrada dessa pessoa não será autorizada em nenhuma hipótese, seja pela entrada social ou pelo acesso de pedestres. Mas o alerta não fica restrito à equipe de segurança. Os LEDs de alerta, instalados na parte externa do condomínio, na calçada junto aos acessos, começam a piscar. Esse sinal serve para orientar quem está chegando. Ao visualizar os LEDs acesos, a pessoa deve entender que existe uma situação de risco em andamento, não deve entrar no condomínio e precisa permanecer em segurança. O objetivo é alertar, impedir novos acessos e proteger todos que estão dentro e fora do condomínio.",
+"Sexta condição. O morador está em um veículo de terceiros, acompanhado de uma pessoa desconhecida pela equipe de segurança, e não está com o controle de acesso. O motorista, sinalizado em amarelo, se apresenta e informa que veio visitar o morador, que está no veículo com ele. Como o morador está sem o controle, não tem como sinalizar uma situação de pânico nem realizar o acionamento normal de acesso. Por isso, nesse procedimento, a senha passa a ser o nome do acompanhante. Já dentro da eclusa, o morador deve informar ao agente o nome da pessoa que está com ele. Esse nome funciona como uma senha de segurança. Primeira situação: o morador informa o nome correto. Nesse caso, o agente entende que está tudo bem, e o acompanhante não precisa sair do veículo. Como não se trata de um acesso em condição de pânico, o agente não solicita a abertura do porta-malas nem o acionamento da luz interna. Ele solicita apenas que os vidros sejam abertos e realiza a vistoria externa do veículo, fazendo a volta sempre pela parte de trás. Ao finalizar a verificação, os vidros são fechados e a portaria libera a abertura do portão interno. Segunda situação: o morador não informa o nome do acompanhante. Em vez disso, diz qualquer outra coisa, como fazer um comentário sobre o tempo ou dizer que está frio. Essa resposta é interpretada como um sinal de pânico. Nesse caso, o acompanhante desconhecido deve sair do veículo. O agente solicita à portaria a abertura do portão externo e orienta que o acompanhante se dirija até a portaria para realizar o cadastro. Com o morador sozinho dentro da eclusa, o agente solicita a abertura do porta-malas, o acionamento da luz interna e realiza a vistoria do veículo, além de uma dupla checagem para confirmar quem realmente está no veículo. Após a verificação, sendo confirmado que se trata de um visitante, o acesso poderá ser autorizado, pois o morador já não está mais na presença de uma possível situação de coação. O visitante retorna ao veículo, o porta-malas é fechado e a portaria solicita a abertura do portão interno. Com isso, o acesso é concluído.",
+["O risco que buscamos controlar é permitir um acesso sem que a equipe de segurança consiga identificar e tratar uma emergência ou uma situação que exija verificação adicional. Por isso, o controle de acesso precisa permitir três coisas: identificar a condição apresentada, responder de forma diferenciada e manter a rastreabilidade de cada acesso.",
+ "É justamente para isso que existe o Procedimento Operacional Padrão, o POP. Ele estabelece como a equipe deve agir diante de um acionamento de pânico ou da ausência do controle de acesso do morador. Vamos entender as principais situações. Pânico acionado: é uma situação de emergência prevista no procedimento. A equipe realiza a verificação do veículo, incluindo a abertura do porta-malas. Acompanhante desconhecido: além da verificação, é necessário realizar o procedimento de identificação e cadastro do acompanhante. Acompanhante conhecido: a equipe também realiza a verificação do veículo, incluindo a abertura do porta-malas. Morador sem controle: é aplicada a verificação prevista no procedimento para essa condição.",
+ "Veículo de terceiros, sem controle: nesse caso, vale a senha de segurança. O morador deve informar o nome do acompanhante que está com ele. Se o nome informado estiver correto, a situação não é considerada pânico. A vistoria é realizada com os vidros abertos e o agente faz a volta ao redor do veículo, sem necessidade de abrir o porta-malas ou acender a luz interna. Por outro lado, se o morador não informar o nome correto e disser qualquer outra coisa, a situação será tratada como pânico. Nesse caso, o procedimento exige a abertura do porta-malas, o acionamento da luz interna, a saída do acompanhante desconhecido para realizar o cadastro e uma dupla checagem com o morador.",
+ "É importante entender um princípio fundamental: a equipe de segurança não decide com base na aparência ou na confiança pessoal. Ela identifica a condição apresentada e aplica o procedimento correspondente.",
+ "Segurança não significa eliminar todos os riscos. Significa identificar as vulnerabilidades, estabelecer controles e preparar a operação para responder adequadamente a cada situação. Mas será que o procedimento garante que nada de errado vai acontecer? Não. Nenhum procedimento é capaz de eliminar completamente os riscos. O objetivo é reduzir a probabilidade de uma ocorrência e, quando ela acontecer, minimizar suas possíveis consequências. E existe um fator importante nessa estratégia: quanto mais camadas de proteção existem, mais obstáculos são criados para quem pretende agir contra o condomínio. Segurança é prevenção, controle e capacidade de resposta. E cada camada de proteção faz a diferença."],
+"As entradas de pedestres também contam com camadas adicionais de segurança. Tanto na entrada social quanto no acesso de pedestres de serviços, existem eclusas, leitores de reconhecimento facial e um agente de segurança posicionado na calçada, atuando como uma barreira externa, sem perder de vista o respectivo acesso. Moradores e prestadores de serviços devidamente autorizados realizam o acesso normalmente, conforme os procedimentos estabelecidos. Já as pessoas sem autorização têm sua entrada impedida pela equipe de segurança. Do lado de fora, quem procura identificar vulnerabilidades pode até observar o condomínio em busca de oportunidades. Mas encontra acessos monitorados, barreiras físicas e procedimentos de segurança bem definidos. A proteção não acontece apenas nos portões de veículos. Ela também está presente em cada entrada de pedestres, reforçando a segurança de todo o condomínio.",
+"Lembre-se: estas camadas de proteção não são excessos. Foram sugeridas tecnicamente pela Moked e decididas pelos moradores para proteger o patrimônio e as nossas famílias. Segurança coletiva se faz com a colaboração de todos. Contamos com você!"];
+const SC=[
+function(){dot('r',900,880,COL.r);hl('r',1);
+ A(0,()=>{bd('Oportunidade e facilidade:\no que o criminoso procura','#fca5a5');go('r',[[1300,860]],80)});
+ A(6000,()=>{bd('Acessos vulneráveis, poucas barreiras\ne entrada sem triagem adequada','#fca5a5');gate('gE',1);go('r',[[1500,840]],70)});
+ A(11000,()=>{bd('Com triagem e barreiras, ele desiste','#86efac');gate('gE',0);dot('a',1425,845,COL.v,'AGENTE');hl('a',1);tag('t1','AGENTE EXTERNO\n1ª camada: triagem na rua',1260,830,1413,848,COL.v);go('r',[[700,890]],90)});
+ A(15500,()=>{bd('Recomendado tecnicamente pela Moked,\naprovado pelo conselho de moradores','#e8a317')});
+ A(22000,()=>{bd('Mais do que controlar acessos,\nestamos protegendo pessoas,\nfamílias e lares','#86efac')});},
+function(){car('c',-170,LY,COL.g,COL.g);
+ /* PARTE 1: simulação com TAG passiva */
+ A(0,()=>{bd('Antes: TAG passiva\nO portão abre sozinho','#fca5a5');go('c',[[EX,LY],[EX,885]],400)});
+ A(5000,()=>{gate('gE',1);tag('t1','TAG: o 1º portão abre sozinho\nPassageiro verde: ninguém desconfia',1180,830,1440,870,'#fca5a5')});
+ A(6200,()=>go('c',[[EX,590]],100));
+ A(9300,()=>{gate('gE',0);tag('t1');bd('Sem triagem: apenas visual, na rua','#fca5a5')});
+ A(10200,()=>{fdOn('f3',1);scr('MORADOR identificado','#22c55e',1);tag('t3','FACIAL VALIDADA\nO portão interno abre sozinho',1060,650,1386,570,'#22c55e')});
+ A(12000,()=>gate('gI',1));
+ A(12600,()=>go('c',[[EX,210],[900,210]],300));
+ A(14600,()=>{gate('gI',0);fdOn('f3',0);tag('t3');scr('Monitorando','#475569',0)});
+ A(15500,()=>{oc('c','p',COL.r,1);flash(1);bd('RISCO DENTRO DO CONDOMÍNIO!\nA ameaça já passou pelas 2 barreiras','#ef4444',1);
+  tag('t5','ALERTA: AMEAÇA DENTRO DO CONDOMÍNIO\nO morador não teve como sinalizar',1190,235,965,215,'#ef4444')});
+ A(18500,()=>{scr('Tudo normal · sem alerta','#22c55e',1);say('p','P','Tudo normal. Nenhum alerta recebido.',3200);say('a','sp1','Tudo tranquilo por aqui.',3200)});
+ A(22500,()=>bd('Sem pânico possível, a equipe\nnão percebe o risco','#fca5a5'));
+ /* PARTE 2: controle linear anticlonagem */
+ A(26000,()=>{rm('c');flash(0);tag('t5');gate('gI',0);gate('gE',0);fdOn('f3',0);scr('Monitorando','#475569',0);
+  bd('Agora: controle linear anticlonagem\nCom triagem completa na eclusa','#86efac');
+  car('c',-170,LY,COL.g,COL.g);dot('a',1425,845,COL.v,'AGENTE');go('c',[[EX,LY],[EX,885]],400)});
+ A(31000,()=>{say('m','c','Acionei o controle!',2200);gate('gE',1);tag('t1','Ação consciente do morador\nse integra às novas camadas',1260,830,1470,870,'#86efac')});
+ A(33200,()=>{go('c',[[EX,590]],100);go('a',[[1440,830],[1440,590]],90)});
+ A(36400,()=>{gate('gE',0);tag('t1');bd('');tag('t2','AGENTE ENTRA NA ECLUSA\nTriagem normal: vistoria do veículo',1060,480,1380,520,'#60a5fa')});
+ A(37500,()=>{say('a','a','Bom dia! Vou fazer a triagem do veículo.',3200)});
+ A(38500,()=>go('a',[[1440,700],[1560,700],[1560,590]],68));
+ A(43000,()=>{fdOn('f3',1);scr('MORADOR identificado','#22c55e',1);tag('t3','FACIAL VALIDADA\nmas NÃO abre o portão interno',1060,650,1386,570,'#f59e0b')});
+ A(45500,()=>tag('t6','AINDA DENTRO DA ECLUSA\nSe houver ameaça, ela é contida aqui,\nantes do portão interno',1010,572,1440,600,'#fde047'));
+ A(48500,()=>say('a','a','Portaria, solicito a abertura do portão interno.',3000));
+ A(51200,()=>{tag('t2');tag('t3');tag('t6')});
+ A(52500,()=>bd('Mais controle, mais uma camada de proteção\ne uma chance real de barrar a ameaça','#86efac'));
+ rel(51500);},
+function(){dot('g1',1380,590,COL.g);dot('y1',1440,590,COL.y);dot('a',1560,590,COL.v,'AGENTE');
+ BF=[()=>card('PADRONIZAÇÃO DA ENTRADA DE VEÍCULOS',[['a','1º acionamento: permite o acesso à eclusa e a realização da triagem.'],['a','2º acionamento (pânico): a equipe realiza a abordagem e a verificação do veículo conforme o protocolo.']]),
+ ()=>card('PESSOA DESCONHECIDA NÃO É AMEAÇA',[['a','A presença de uma pessoa desconhecida no veículo não significa que ela seja uma ameaça.'],['a','Significa que existe uma condição diferente, que precisa ser tratada conforme o procedimento.']]),
+ ()=>card('POR QUE TRATAR COMO CONDIÇÃO DIFERENTE?',[['q','“Mas consultor, o morador conhece a pessoa. Por que tratar como uma situação diferente?”'],['a','Porque o procedimento não é baseado em julgamento pessoal sobre quem é confiável. Ele estabelece critérios objetivos para a equipe agir de maneira padronizada.'],['a','O morador pode conhecer o acompanhante, mas a equipe não conhece e precisa cumprir o protocolo definido para aquela condição.']]),
+ ()=>card('SITUAÇÃO NÃO É ACUSAÇÃO',[['a','Não estamos dizendo que a pessoa é uma ameaça. Estamos dizendo que a situação exige um procedimento específico.']])];
+ E.g1.g.remove();E.y1.g.remove();E.a.g.remove();delete E.g1;delete E.y1;delete E.a;},
+function(){let t=open_({});A(t,()=>say('a','a','Bom dia! Tudo bem?',2200));
+ A(t+1200,()=>{tag('tm','VISUAL AO REDOR DO VEÍCULO\nO agente dá a volta completa, por trás',1010,572,1440,668,'#fde047');go('a',[[1440,700],[1560,700],[1560,590]],68)});
+ A(t+6800,()=>tag('tm'));A(t+7200,face);A(t+10200,()=>say('a','a','Portaria, solicito a abertura do portão interno.',3000));rel(t+13400);},
+function(){let t=open_({pan:1});A(t,()=>say('a','a','Bom dia, senhor!',2000));A(t+2000,face);let a=tri(t+4500);
+ A(a,()=>say('a','a','Algum motivo para o acionamento do pânico?',2800));A(a+3000,()=>say('m','c','Foi engano, acionei sem querer.',2600));
+ A(a+6000,()=>say('a','a','Sem suspeitos. Portaria, solicito abertura do portão interno.',3400));rel(a+9500,1);},
+function(){let t=open_({p:'y'});A(t,()=>{say('a','a','Bom dia! Tudo bem?',2200);tag('t7','Acompanhante desconhecido: amarelo\nSem pânico: fluxo padrão, registrado',610,500,null,0,COL.y)});A(t+2600,face);A(t+5600,()=>say('a','a','Portaria, solicito a abertura do portão interno.',3000));rel(t+8800);},
+function(){let t=open_({p:'g',pan:1});A(t,()=>{say('a','a','Bom dia! Tudo bem?',2200);tag('t7','Acompanhante conhecido: verde\nNão precisa descer',610,500,null,0,COL.g)});A(t+2400,face);let a=tri(t+4800);
+ A(a,()=>say('a','a','Algum motivo para o acionamento do pânico?',2800));A(a+3000,()=>say('m','c','Foi engano, acionei sem querer.',2600));
+ A(a+6000,()=>say('a','a','Sem suspeitos. Portaria, solicito abertura do portão interno.',3400));rel(a+9500,1);},
+function(){let t=open_({p:'y',pan:1});
+ A(t,()=>say('a','a','Bom dia! Tudo bem?',2000));A(t+2000,face);
+ A(t+4800,()=>{say('a','a','Portaria, há uma pessoa desconhecida. Solicito abrir o portão externo.',4000);tag('t7','Acompanhante desconhecido: amarelo',610,500,null,0,COL.y)});
+ A(t+9200,()=>say('p','P','Abrindo o portão externo.',2200));
+ A(t+10000,()=>{gate('gE',1);say('a','a','Por gentileza, desça e siga até a portaria para o cadastro.',3600);oc('c','p',null);dot('v',EX+14,580,COL.y);go('v',[[1565,570],[1565,830],[1142,870]],200)});
+ A(t+14800,()=>{gate('gE',0);say('p','P','Cadastro do visitante em andamento.',2600);fdOn('f2',1)});
+ A(t+17800,()=>{say('p','P','Cadastro concluído. Visitante autorizado.',2600);setCol('v',COL.g);tag('t8','AMARELO → VERDE\nApós o cadastro, entra por pedestres',610,590,null,0,COL.g);go('v',[[1070,870],[1070,800],[1070,690]],110)});
+ A(t+20500,()=>fdOn('f2',0));
+ let a=tri(t+19000,'Agora, abra a luz interna, os vidros e o porta-malas, por favor.');
+ A(a,()=>say('a','a','Senhor, posso liberar o visitante?',2400));A(a+2800,()=>say('m','c','Sim, pode liberar.',2000));rel(a+5200,1);},
+function(){let t=open_({p:'y',pan:1});A(t,()=>say('a','a','Bom dia! Vamos fazer a vistoria.',2400));A(t+2200,face);let a=tri(t+4500);
+ A(a,()=>{say('p','P','Pânico confirmado! Acionando a Polícia Militar.',3400);scr('PM ACIONADA · AMEAÇA CONFIRMADA','#ef4444',0);oc('c','p',COL.r,1);
+  tag('t8','AMARELO → VERMELHO\nAmeaça confirmada (pisca)',610,590,null,0,'#ef4444');dot('r',1300,880,COL.v,'RONDA')});
+ A(a+3500,()=>{say('a','a','Portão externo liberado para a saída.',2600);gate('gE',1);oc('c','p',null);dot('v',EX+14,580,COL.r);E.v.ci.classList.add('blink');go('v',[[1565,570],[1565,830],[1790,830],[1790,945],[1950,945]],170);go('r',[[1440,760],[1440,690]],90)});
+ A(a+9000,()=>{gate('gE',0);tag('t6','ACESSO NEGADO À AMEAÇA\nnem pela entrada social, nem por pedestres',610,420,null,0,'#ef4444')});
+ A(a+1000,()=>cstep(1));A(a+2800,()=>cstep(2));A(a+4600,()=>cstep(3));A(a+6400,()=>cstep(4));
+ A(a+9800,()=>{say('p','P','Iniciando o plano de chamada aos responsáveis pela segurança.',3600);pstep(1,0)});
+ A(a+12000,()=>pstep(1,1));A(a+12200,()=>pstep(2,0));A(a+14200,()=>pstep(2,1));A(a+14400,()=>pstep(3,0));A(a+16400,()=>pstep(3,1));A(a+16600,()=>pstep(4,0));A(a+18400,()=>pstep(4,1));
+  A(a+19500,()=>{led(1);tag('t5','LEDs EXTERNOS PISCANDO na calçada\nQuem chega não entra e se mantém seguro',540,720,null,0,'#ef4444')});
+  A(a+23000,()=>bd('Alertar, impedir novos acessos e proteger\nquem está dentro e fora do condomínio','#fca5a5'));},
+function(){let t=open_({d:'y',p:'g',nc:1});
+ /* SITUAÇÃO 1: o morador fala a senha (nome do acompanhante) */
+ A(t,()=>{tag('ts','SITUAÇÃO 1 · O MORADOR FALA A SENHA\nSenha = nome do acompanhante',650,215,null,0,'#86efac');say('m','c:p','Bom dia! Este é o Carlos, meu visitante.',3200)});
+ A(t+3500,()=>{tag('t7','SENHA CORRETA\nO morador disse o nome do acompanhante',650,430,null,0,'#22c55e');say('a','a','Bom dia, Carlos! Tudo certo.',2600)});
+ A(t+6500,face);
+ A(t+9000,()=>tag('t7','O ACOMPANHANTE NÃO SAI DO VEÍCULO\nO vigilante entende que está tudo bem',650,430,null,0,'#22c55e'));
+ let a=tri(t+11500,'Abra os vidros, por favor.',VST1,1);
+ A(a,()=>{tag('t7');say('a','a','Portaria, solicito a abertura do portão interno.',2800);face()});
+ let e=rel(a+3000,1,1);
+ /* SITUAÇÃO 2: o morador NÃO fala a senha = acesso de pânico */
+ let b=e+500;
+ A(b,()=>{wipe();car('c',EX,590,COL.y,COL.g);E.c.a=-90;put('c');dot('a',1440,590,COL.v,'AGENTE');
+  tag('ts','SITUAÇÃO 2 · O MORADOR NÃO FALA A SENHA\nQualquer outra frase = acesso de pânico',650,215,null,0,'#fca5a5');
+  tag('t2','TRIAGEM DENTRO DA ECLUSA\nZona controlada, ainda considerada rua',1060,480,1380,520,'#60a5fa')});
+ A(b+800,()=>say('m','c:p','Bom dia! Hoje está frio, não é?',2800));
+ A(b+3600,()=>{tag('t7','SENHA NÃO FALADA = ACESSO DE PÂNICO\nO morador não disse o nome do acompanhante\nO desconhecido é OBRIGADO a sair',650,430,null,0,'#ef4444');scr('PÂNICO · SENHA NÃO DITA','#ef4444',0)});
+ A(b+6500,()=>say('a','a','Senhor, desça do veículo e siga até a portaria para o cadastro.',4200));
+ A(b+7500,()=>gate('gE',1));
+ A(b+8500,()=>{oc('c','d',null);dot('v',EX-14,580,COL.y);go('v',[[1420,600],[1420,830],[1142,870]],200)});
+ A(b+12500,()=>{gate('gE',0);fdOn('f2',1);say('p','P','Cadastro do visitante em andamento.',2800);tag('t7','DESCONHECIDO NA PORTARIA · CADASTRO\nO morador fica na eclusa, longe de\nquem poderia estar coagindo',650,430,null,0,'#fbbf24')});
+ tri(b+15500,'Abra a luz interna, os vidros e o porta-malas, por favor.',VST);
+ A(b+19200,()=>{say('a','a','Estamos só nós aqui. O senhor está bem? Quem é essa pessoa de verdade?',4600);tag('t7','DUPLA CHECAGEM NA ECLUSA\nSem o desconhecido por perto, o morador\nconfirma quem ele realmente é',650,430,null,0,'#60a5fa')});
+ A(b+24200,()=>say('m','c:p','Estou bem. É o Carlos, meu visitante.',3000));
+ A(b+27500,()=>{say('p','P','Cadastro e documento conferidos. É visitante.',3200);setCol('v',COL.g);scr('Visitante confirmado','#22c55e',1);tag('t7','VISITANTE CONFIRMADO · AUTORIZADO\nO morador não está mais sendo coagido',650,430,null,0,'#22c55e')});
+ A(b+31000,()=>{say('a','a','Acesso autorizado. O senhor pode voltar ao veículo.',3200);gate('gE',1);fdOn('f2',0)});
+ A(b+32000,()=>go('v',[[1420,830],[1428,610]],200));
+ A(b+34800,()=>{gate('gE',0);rm('v');oc('c','d',COL.g,0,1);tag('t7');tag('t2');tag('ts');scr('Monitorando','#475569',0)});
+ A(b+35600,()=>{say('a','a','Portaria, solicito a abertura do portão interno.',2800);face()});
+ rel(b+38600,1);},
+function(){
+ BF=[()=>card('O RISCO QUE O PROCEDIMENTO CONTROLA',[['a','Permitir o acesso sem que a equipe consiga identificar e tratar uma emergência ou uma condição que exija verificação adicional.'],['a','O controle de acesso deve permitir identificar a condição, responder de forma diferenciada e manter a rastreabilidade de cada acesso.'],['a','Por isso existe o Procedimento Operacional Padrão (POP): ele define como a equipe age diante do pânico ou da ausência do controle.']]),
+ ()=>card('RESPOSTAS DO POP AO PÂNICO OU SEM CONTROLE · ACESSO DO MORADOR',[['r','Botão de pânico acionado','Emergência prevista: verificação, incluindo abertura do porta-malas'],['r','Com acompanhante desconhecido no veículo','Emergência prevista: verificação, incluindo abertura do porta-malas; procedimento de identificação e cadastro'],['r','Com acompanhante conhecido no veículo','Emergência prevista: verificação, incluindo abertura do porta-malas'],['r','Morador sem controle','Emergência prevista: verificação, incluindo abertura do porta-malas']]),
+ ()=>card('VEÍCULO DE TERCEIROS E VISITANTE SEM CONTROLE',[['r','Veículo de terceiros, sem controle · senha correta','Senha: o morador diz o nome do acompanhante. Não é pânico: vidros abertos e volta ao redor do veículo, sem abrir o porta-malas nem acender a luz interna'],['r','Veículo de terceiros, sem controle · senha errada','Qualquer outra fala é pânico: porta-malas aberto e luz interna acesa; o desconhecido sai, faz o cadastro e há dupla checagem na eclusa']]),
+ ()=>card('CRITÉRIO, NÃO APARÊNCIA',[['a','A equipe não decide pela aparência ou pela confiança pessoal.'],['a','Ela identifica a condição apresentada e aplica o procedimento correspondente.']]),
+ ()=>card('SEGURANÇA NÃO É ELIMINAR TODO RISCO',[['a','É identificar riscos, estabelecer controles e preparar a operação para responder adequadamente.'],['q','“Esse procedimento garante que nunca vai acontecer?”'],['a','Nenhum procedimento elimina o risco. O objetivo é reduzir a probabilidade e, quando possível, a consequência. Quanto mais camadas existem, mais obstáculos para quem pretende agir contra o condomínio.'],['q','Segurança é prevenção, controle e capacidade de resposta. E cada camada de proteção faz a diferença.']])];},
+function(){patrolOn=false;dot('r1',500,925,COL.r);hl('r1',1);dot('r2',1600,880,COL.r);hl('r2',1);
+ go('r1',[[1000,925],[500,925],[1000,925]],40);go('r2',[[1850,880],[1600,880],[1850,880]],30);
+ A(300,()=>{tag('t1','Acesso social: eclusa, facial e agente\nna calçada como barreira externa',520,610,300,866,'#3b82f6');tag('t2','Pedestres e serviços: eclusa, facial e agente\nna calçada como barreira externa',1170,610,1182,866,'#34d399')});
+ A(1500,()=>{dot('g1',-40,880,COL.g);go('g1',[[190,880]],110)});A(3700,()=>fdOn('f1',1));A(5000,()=>{fdOn('f1',0);go('g1',[[190,800],[190,640]],90)});
+ A(2500,()=>{dot('g2',700,880,COL.g);go('g2',[[1070,880]],110)});A(6100,()=>fdOn('f2',1));A(7400,()=>{fdOn('f2',0);go('g2',[[1070,800],[1070,640]],90)});
+ A(9000,()=>{dot('y1',-40,890,COL.y);go('y1',[[190,880]],110)});A(11500,()=>{go('sp1',[[215,865]],50);say('a','sp1','Acesso não autorizado.',2400)});A(14000,()=>{go('y1',[[-80,900]],120);go('sp1',[[300,880]],50)});
+ A(15500,()=>{dot('y2',700,890,COL.y);go('y2',[[1070,880]],110)});A(19500,()=>{go('sp2',[[1105,865]],50);say('a','sp2','Sem autorização. Acesso negado.',2400)});A(22000,()=>{go('y2',[[500,900]],130);go('sp2',[[1182,880]],50)});
+ A(24000,()=>{dot('g3',-40,880,COL.g);go('g3',[[190,880]],110)});A(26300,()=>fdOn('f1',1));A(27600,()=>{fdOn('f1',0);go('g3',[[190,800],[190,640]],90)});
+ A(30000,()=>{dot('g4',1300,880,COL.g);go('g4',[[1070,880]],110)});A(32300,()=>fdOn('f2',1));A(33600,()=>{fdOn('f2',0);go('g4',[[1070,800],[1070,640]],90)});
+ A(6500,()=>go('sp1',[[225,880]],45));A(8300,()=>go('sp1',[[300,880]],45));A(3500,()=>go('sp2',[[1115,880]],45));A(5300,()=>go('sp2',[[1182,880]],45));
+ A(17000,()=>go('sp2',[[1115,880]],45));A(18800,()=>go('sp2',[[1182,880]],45));A(23500,()=>go('sp1',[[225,880]],45));A(25300,()=>go('sp1',[[300,880]],45));A(29000,()=>go('sp2',[[1115,880]],45));A(30800,()=>go('sp2',[[1182,880]],45));A(35000,()=>go('sp1',[[225,880]],45));A(36800,()=>go('sp1',[[300,880]],45));
+ A(38500,()=>bd('A proteção também está em cada\nentrada de pedestres','#e8a317'));
+ A(36000,()=>tag('t3','Observadores do lado de fora procurando\nvulnerabilidades: encontram camadas controladas',700,850,520,915,'#ef4444'));},
+function(){car('c',-170,LY,COL.g,null);dot('a',1425,845,COL.v,'AGENTE');go('c',[[EX,LY],[EX,885]],400);
+ A(4700,()=>say('a','a','Bom dia!',1800));A(6000,()=>gate('gE',1));A(7200,()=>{go('c',[[EX,590]],100);go('a',[[1440,830],[1440,590]],90)});
+ A(10300,()=>gate('gE',0));A(11300,()=>gate('gI',1));A(12500,()=>go('c',[[EX,210],[900,210]],300));
+ A(16500,()=>bd('Sugerido pela Moked.\nDecidido pelos moradores.','#fff'));A(21500,()=>bd('Segurança coletiva se faz com a\ncolaboração de todos. Contamos com você!','#e8a317'));}];
+/* voice */
+let VZ=[];function pick(){if(!window.speechSynthesis)return;const sc=v=>(/pt[-_]BR/i.test(v.lang)?4:0)+(/natural|neural|online/i.test(v.name)?5:0)+(/google/i.test(v.name)?3:0)+(/francisca|antonio|thalita|luciana|felipe|microsoft/i.test(v.name)?2:0)+(v.localService?0:1);
+ VZ=speechSynthesis.getVoices().filter(v=>/^pt/i.test(v.lang)).sort((a,b)=>sc(b)-sc(a));const s=$('vs'),o=s.value;s.innerHTML='';VZ.forEach(v=>{const p=document.createElement('option');p.value=p.textContent=v.name;s.appendChild(p);});if(o&&VZ.some(v=>v.name===o))s.value=o;}
+if(window.speechSynthesis){pick();speechSynthesis.onvoiceschanged=pick;}
+function chunks(t){const o=[];(t.match(/[^.!?]+[.!?]+/g)||[t]).forEach(s=>{s=s.trim();while(s.length>190){let i=s.lastIndexOf(', ',150);if(i<40)i=s.lastIndexOf(' ',150);o.push(s.slice(0,i+1).trim());s=s.slice(i+1).trim();}o.push(s)});return o;}
+function speak(ch,my){let i=0;(function nx(){if(my!==tokS)return;if(i>=ch.length){sdone=true;return;}CKF(i);sub(ch[i]);const u=new SpeechSynthesisUtterance(ch[i++]);u.lang='pt-BR';u.rate=Math.min(2,.97*SP);const v=VZ.find(x=>x.name===$('vs').value);if(v)u.voice=v;u.onend=nx;u.onerror=nx;speechSynthesis.speak(u);})();}
+/* player */
+function stop(){run=false;tokS++;if(window.speechSynthesis)speechSynthesis.cancel();if(AE){AE.pause();AE=null;}}
+function play(i){stop();cur=i;started=1;reset();SC[i]();
+ const beats=Array.isArray(N[i])?N[i]:[N[i]],ch=[],bs={};beats.forEach((b,j)=>{bs[ch.length]=j;chunks(b).forEach(c=>ch.push(c));});
+ CKF=k=>{if(bs[k]!==undefined&&BF[bs[k]])BF[bs[k]]();};
+ const au=(typeof AUD!=='undefined')&&AUD[i+1],vz=!au&&$('vz').checked&&window.speechSynthesis;let cum=0;sdone=!vz;K=1;
+ if(!vz)ch.forEach((c,k)=>{const t=cum;A(t,()=>{sub(c);CKF(k)});cum+=c.length*62+300;});
+ Q.sort((a,b)=>a[0]-b[0]);lastT=Math.max(cum,...Q.map(q=>q[0]))+2500;
+ chap(i);run=true;$('vp').classList.remove('pz');ui();if(vz)speak(ch,tokS);
+ if(au){sdone=false;const a=AE=new Audio(au);a.playbackRate=SP;a.onloadedmetadata=()=>{if(AE===a&&isFinite(a.duration)&&a.duration>1)K=Math.max(.3,Math.min(3,(lastT-2500)/(a.duration*1000)));};a.onended=()=>{if(AE===a)sdone=true;};a.onerror=()=>{if(AE===a)sdone=true;};a.play().catch(()=>{});}}
+function ui(){$('pp').textContent=run?'Pausar':(started?'Continuar':'Reproduzir');[...$('ls').children].forEach((b,i)=>b.classList.toggle('on',i===cur));$('pg').style.width=((cur+(run?.5:0))/N.length*100)+'%';}
+function done(){if(cur<N.length-1)play(cur+1);else{run=false;started=0;ui();}}
+function tick(){if(!run)return;while(qi<Q.length&&Q[qi][0]<=T){Q[qi][1]();qi++;}
+ TW=TW.filter(w=>{if(T<w.s)return true;const r=Math.min(1,(T-w.s)/w.d);w.f(r);return r<1;});
+ BB=BB.filter(b=>{if(T>=b.u){b.g.remove();return false;}return true;});
+ DQ=DQ.filter(d=>{if(T>=d[0]){d[1]();return false;}return true;});
+ if(patrolOn)for(const id in PA){const a=PA[id];if(a.n<=T&&E[id]){const m=go(id,[a.p],50);DQ.push([T+m+1500,()=>{if(E[id])go(id,[a.h],50)}]);a.n=T+m*2+1500+(id==='sp1'?5000:7500);}}
+ if(qi>=Q.length&&!TW.length&&sdone&&T>lastT)done();}
+let last=performance.now();
+(function loop(n){if(run)T+=Math.min(50,n-last)*SP*K;last=n;tick();requestAnimationFrame(loop);})(last);
+$('pp').onclick=()=>{if(run){run=false;$('vp').classList.add('pz');if(window.speechSynthesis)speechSynthesis.pause();if(AE)AE.pause();ui();}else if(started){run=true;$('vp').classList.remove('pz');if(window.speechSynthesis)speechSynthesis.resume();if(AE)AE.play().catch(()=>{});ui();}else play(cur);};
+$('pv').onclick=()=>play(Math.max(0,cur-1));$('nx').onclick=()=>play(Math.min(N.length-1,cur+1));
+NAMES.forEach((n,i)=>{const b=document.createElement('button');b.textContent=(i+1)+'. '+n;b.onclick=()=>play(i);$('ls').appendChild(b);});
+$('fs').onclick=()=>{const v=$('vp');document.fullscreenElement?document.exitFullscreen():v.requestFullscreen&&v.requestFullscreen();};
+function fit(){const v=$('vp'),w=v.clientWidth,h=v.clientHeight,s=Math.min(w/1920,h/1080);$('fr').style.transform='translate('+(w-1920*s)/2+'px,'+(h-1080*s)/2+'px) scale('+s+')';}
+addEventListener('resize',fit);document.addEventListener('fullscreenchange',fit);
+reset();chap(0);sub('Pressione Reproduzir para iniciar');ui();fit();
+</script>
+<div id="lg" class="ov" hidden><form id="lf" class="bx"><h2>POP CDA · Acesso de Veículos</h2><p>Entre para assistir ao vídeo explicativo.</p>
+<input type="text" id="lnm" placeholder="Nome completo" autocomplete="name" hidden>
+<input type="email" id="lem" placeholder="E-mail" autocomplete="email" required>
+<input type="password" id="lpw" placeholder="Senha (mínimo 6 caracteres)" autocomplete="current-password" minlength="6" required>
+<button class="p" id="lbt">Entrar</button><button type="button" class="lk" id="lsw">Ainda não tenho cadastro</button><div class="ms" id="lms"></div></form></div>
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ===== CONFIGURAÇÃO: fica no arquivo config.js (veja o manual). Não edite aqui. ===== */
+const CFG=window.POP_CFG||{URL:'',KEY:''};
+/* ===== velocidade e legendas ===== */
+[[.5,'0,5×'],[.75,'0,75×'],[1,'1×'],[1.5,'1,5×'],[2,'2×'],[3,'3×']].forEach(([v,l])=>{const b=document.createElement('button');b.textContent=l;if(v===1)b.className='on';
+ b.onclick=()=>{SP=v;if(AE)AE.playbackRate=v;[...$('spd').querySelectorAll('button')].forEach(x=>x.classList.toggle('on',x===b));};$('spd').appendChild(b);});
+$('lgd').onchange=()=>{$('sb').style.display=$('lgd').checked?'':'none';};
+/* ===== login, acessos e áudios ===== */
+let SB=null,ISADM=false,AUD={},AUP={},mode='in';
+const CONF=!!(CFG.URL&&CFG.KEY)&&!/COLE_AQUI/.test(CFG.URL+CFG.KEY),OPEN=!CONF;
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function msg(t,ok){const m=$('lms');m.textContent=t||'';m.style.color=ok?'#16a34a':'#dc2626';}
+async function loadAud(){if(OPEN)return;AUD={};AUP={};const r=await SB.from('audio_capitulos').select('cap,path');
+ for(const x of r.data||[]){AUP[x.cap]=x.path;const s=await SB.storage.from('audios').createSignedUrl(x.path,21600);if(s.data)AUD[x.cap]=s.data.signedUrl;}}
+async function enter(u){const r=await SB.from('profiles').select('nome,is_admin').eq('id',u.id).maybeSingle(),p=r.data;ISADM=!!(p&&p.is_admin);
+ try{if(!sessionStorage.getItem('lg_'+u.id)){await SB.from('access_log').insert({user_id:u.id,email:u.email,nome:(p&&p.nome)||''});sessionStorage.setItem('lg_'+u.id,'1');}}catch(e){}
+ await loadAud();$('lg').hidden=true;$('usr').textContent=((p&&p.nome)||u.email)+(ISADM?' (administrador)':'');$('adm').hidden=!ISADM;$('sai').hidden=false;}
+$('lsw').onclick=()=>{mode=mode==='in'?'up':'in';$('lnm').hidden=mode==='in';$('lnm').required=mode==='up';$('lbt').textContent=mode==='in'?'Entrar':'Criar cadastro';
+ $('lsw').textContent=mode==='in'?'Ainda não tenho cadastro':'Já tenho cadastro';msg('');};
+$('lf').onsubmit=async e=>{e.preventDefault();msg('');const em=$('lem').value.trim(),pw=$('lpw').value;$('lbt').disabled=true;
+ try{if(mode==='in'){const r=await SB.auth.signInWithPassword({email:em,password:pw});if(r.error)throw r.error;await enter(r.data.user);}
+  else{const r=await SB.auth.signUp({email:em,password:pw,options:{data:{nome:$('lnm').value.trim()}}});if(r.error)throw r.error;
+   if(r.data.session)await enter(r.data.user);else{$('lsw').onclick();msg('Cadastro criado. Confirme o e-mail recebido e depois entre.',1);}}}
+ catch(x){msg(x.message||'Erro ao entrar');}
+ $('lbt').disabled=false;};
+$('sai').onclick=async()=>{try{await SB.auth.signOut();}catch(e){}location.reload();};
+/* painel do administrador */
+$('adm').onclick=()=>{const p=$('admp');p.hidden=!p.hidden;if(!p.hidden)admView('au');};
+async function upAud(cap,f){if(OPEN){AUD[cap]=URL.createObjectURL(f);return;}
+ const ext=((f.name.split('.').pop()||'mp3').toLowerCase().replace(/[^a-z0-9]/g,''))||'mp3',path='cap-'+cap+'-'+Date.now()+'.'+ext;
+ const u=await SB.storage.from('audios').upload(path,f,{contentType:f.type||'audio/mpeg'});if(u.error)throw u.error;
+ const r=await SB.from('audio_capitulos').upsert({cap,path,updated_at:new Date().toISOString()});if(r.error)throw r.error;
+ const old=AUP[cap];if(old)await SB.storage.from('audios').remove([old]);await loadAud();}
+async function rmAud(cap){if(OPEN){delete AUD[cap];return;}const old=AUP[cap],r=await SB.from('audio_capitulos').delete().eq('cap',cap);if(r.error)throw r.error;
+ if(old)await SB.storage.from('audios').remove([old]);await loadAud();}
+async function admView(t){const P=$('admp');
+ P.innerHTML='<div class="bar"><button data-t="au" class="'+(t==='au'?'p':'')+'">Áudios da narração</button><button data-t="ac" class="'+(t==='ac'?'p':'')+'">Acessos</button></div><div id="admc"></div>';
+ P.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>admView(b.dataset.t));const c=$('admc');
+ if(t==='ac'){if(OPEN){c.textContent='Disponível somente com o Supabase configurado.';return;}c.textContent='Carregando…';
+  const r=await SB.rpc('admin_resumo');if(r.error){c.textContent='Erro: '+r.error.message;return;}
+  const d=r.data||[],f=x=>x?new Date(x).toLocaleString('pt-BR'):'—',tot=d.reduce((a,x)=>a+Number(x.acessos||0),0);
+  c.innerHTML='<p><b>'+d.length+'</b> pessoas cadastradas · <b>'+tot+'</b> acessos no total</p><div style="overflow:auto"><table><tr><th>Nome</th><th>E-mail</th><th>Cadastro</th><th>Acessos</th><th>Último acesso</th></tr>'
+   +d.map(x=>'<tr><td>'+esc(x.nome)+'</td><td>'+esc(x.email)+'</td><td>'+f(x.criado)+'</td><td>'+x.acessos+'</td><td>'+f(x.ultimo)+'</td></tr>').join('')+'</table></div>';}
+ else{const none='sem áudio (usa a voz do navegador)';
+  c.innerHTML='<p>Envie um arquivo de áudio (MP3, M4A ou WAV) por capítulo. A animação se ajusta sozinha à duração do áudio.'+(OPEN?' <b>Modo teste local:</b> os áudios valem só até fechar a página.':'')+'</p>'
+   +NAMES.map((n,i)=>'<div class="row"><b style="min-width:230px">'+(i+1)+' · '+esc(n)+'</b><span id="as'+(i+1)+'">'+(AUD[i+1]?'✔ áudio carregado':none)+'</span><input type="file" accept="audio/*" data-c="'+(i+1)+'"><button data-r="'+(i+1)+'">Remover</button></div>').join('');
+  c.querySelectorAll('input[type=file]').forEach(inp=>inp.onchange=async()=>{const cap=+inp.dataset.c,f=inp.files[0];if(!f)return;const s=$('as'+cap);s.textContent='Enviando…';
+   try{await upAud(cap,f);s.textContent='✔ áudio carregado';}catch(e){s.textContent='Erro: '+(e.message||e);}});
+  c.querySelectorAll('[data-r]').forEach(b=>b.onclick=async()=>{const cap=+b.dataset.r;try{await rmAud(cap);$('as'+cap).textContent=none;}catch(e){$('as'+cap).textContent='Erro: '+(e.message||e);}});}}
+/* início */
+(async function(){
+ if(OPEN){ISADM=true;$('adm').hidden=false;$('usr').textContent='Modo teste local (sem login)';return;}
+ $('lg').hidden=false;
+ if(!window.supabase){$('lf').innerHTML='<h2>Serviço indisponível</h2><p>Não foi possível carregar o serviço de login. Verifique a conexão e recarregue a página.</p>';return;}
+ SB=supabase.createClient(CFG.URL,CFG.KEY);
+ const r=await SB.auth.getSession();if(r.data.session)await enter(r.data.session.user);})();
+</script>
+
+</body></html>
